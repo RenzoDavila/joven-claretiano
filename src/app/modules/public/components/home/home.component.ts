@@ -8,7 +8,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent {
-  blogs:any
+  blogs:any;
+  lastBlogs:any;
+  popularBlogs:any;
 
   constructor(
     private _blogService: BlogService,
@@ -21,11 +23,30 @@ export class HomeComponent {
 
   getBlogs() {
     this.toastr.info('cargando...', 'obteniendo los blogs')
-    this._blogService.getBlogs().subscribe(
+    this.getLastBlogs()
+    this.getPopularBlogs()
+  }
+
+  getLastBlogs() {
+    this._blogService.getLastBlogs().subscribe(
       (data) => {
         console.log("data", data)
-        this.blogs = data
-        this.toastr.info('Excito!!!', 'blogs cargados correctamente')
+        this.lastBlogs = data
+        this.toastr.success('Excito!!!', 'blogs recientes cargados correctamente')
+
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getPopularBlogs() {
+    this._blogService.getPopularBlogs().subscribe(
+      (data) => {
+        console.log("data", data)
+        this.popularBlogs = data
+        this.toastr.success('Excito!!!', 'blogs populares cargados correctamente')
 
       },
       (error) => {

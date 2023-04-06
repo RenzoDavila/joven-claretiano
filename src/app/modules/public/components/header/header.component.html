@@ -14,7 +14,10 @@
             <a class="nav-link" [ngClass]="{'active' : router.url === '/'}" aria-current="page" [routerLink]="['']">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active' : router.url === '/contact'}" [routerLink]="['/contact']">contact</a>
+            <a class="nav-link" [ngClass]="{'active' : router.url === '/blog'}" [routerLink]="['/blog']">Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active' : router.url === '/contact'}" [routerLink]="['/contact']">Contáctame</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [ngClass]="{'active' : router.url === '/disabled', 'disabled' : router.url != '/disabled'}">Disabled</a>

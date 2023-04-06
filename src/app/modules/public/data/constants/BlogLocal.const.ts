@@ -91,7 +91,7 @@ export const BlogLocal = [
         multimedia: ""
       }
     ],
-    views: 3,
+    views: 9,
     fecha: '2023-01-25T12:14:09.553Z'
   },
   {
@@ -201,7 +201,7 @@ export const BlogLocal = [
         multimedia: "imagen1"
       }
     ],
-    views: 8,
+    views: 2,
     fecha: '2023-03-10T12:14:09.553Z'
   },
   {
@@ -225,5 +225,106 @@ export const BlogLocal = [
     ],
     views: 0,
     fecha: '2023-03-29T12:14:09.553Z'
+  },
+]
+
+export const LastBlogLocal = [
+  {
+    _id: '625c6c1eaa25c183d8948adf',
+    title: 'blog 8',
+    content: [
+      {
+        paragrap: 1,
+        text: 'Sed sed risus pretium quam vulputate dignissim suspendisse. Odio euismod lacinia at quis risus sed. Ullamcorper sit amet risus nullam eget felis eget nunc. Orci dapibus ultrices in iaculis nunc sed augue. Diam sollicitudin tempor id eu. Rutrum quisque non tellus orci ac auctor augue mauris augue. Facilisis gravida neque convallis a cras semper. Diam donec adipiscing tristique risus nec feugiat. Ultricies mi eget mauris pharetra et. Eget nunc lobortis mattis aliquam faucibus. At varius vel pharetra vel. Elementum curabitur vitae nunc sed velit dignissim sodales. Euismod nisi porta lorem mollis aliquam ut porttitor leo. Egestas dui id ornare arcu odio ut sem nulla.',
+        multimediaType: 0,
+        multimediaPosition: 2,
+        multimedia: ""
+      },
+      {
+        paragrap: 2,
+        text: 'Euismod nisi porta lorem mollis aliquam. Et tortor at risus viverra adipiscing at. Id ornare arcu odio ut sem nulla. Netus et malesuada fames ac turpis egestas sed tempus. Consequat semper viverra nam libero justo laoreet. Dui vivamus arcu felis bibendum ut tristique et. Arcu dictum varius duis at consectetur. Commodo odio aenean sed adipiscing diam donec adipiscing tristique risus. Adipiscing vitae proin sagittis nisl rhoncus. Elit pellentesque habitant morbi tristique. Praesent semper feugiat nibh sed pulvinar proin gravida. Quam elementum pulvinar etiam non quam lacus suspendisse. Tristique senectus et netus et malesuada fames. Et magnis dis parturient montes nascetur.',
+        multimediaType: 1,
+        multimediaPosition: 2,
+        multimedia: "imagen1"
+      }
+    ],
+    views: 2,
+    fecha: '2023-03-10T12:14:09.553Z'
+  },
+  {
+    _id: '625c6cbfaa25c183d8948aee',
+    title: 'blog 9',
+    content: [
+      {
+        paragrap: 1,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam sollicitudin tempor id eu nisl nunc mi. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Ultrices vitae auctor eu augue ut. Ut lectus arcu bibendum at varius vel pharetra vel turpis. Quis imperdiet massa tincidunt nunc. Leo urna molestie at elementum. Odio tempor orci dapibus ultrices in iaculis. Mauris nunc congue nisi vitae suscipit tellus mauris a. Et ultrices neque ornare aenean.',
+        multimediaType: 1,
+        multimediaPosition: 3,
+        multimedia: "imagen1"
+      },
+      {
+        paragrap: 2,
+        text: 'Velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus. Augue lacus viverra vitae congue eu consequat ac felis. Posuere ac ut consequat semper viverra nam libero justo. Cras sed felis eget velit. Sagittis purus sit amet volutpat consequat mauris nunc. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Condimentum vitae sapien pellentesque habitant morbi tristique. Amet justo donec enim diam vulputate ut pharetra sit. Nunc faucibus a pellentesque sit amet. Elementum nibh tellus molestie nunc non blandit massa. Id aliquet risus feugiat in. Sit amet commodo nulla facilisi. Tempus urna et pharetra pharetra massa massa ultricies mi quis.',
+        multimediaType: 1,
+        multimediaPosition: 2,
+        multimedia: "imagen2"
+      }
+    ],
+    views: 0,
+    fecha: '2023-03-29T12:14:09.553Z'
+  },
+]
+
+export const PopularBlogLocal = [
+  {
+    _id: '625a0d87aa25c183d8948566',
+    title: 'fin de año',
+    content: [
+      {
+        paragrap: 1,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Gravida in fermentum et sollicitudin ac orci. Et tortor consequat id porta nibh. Quisque egestas diam in arcu cursus euismod. Eget aliquet nibh praesent tristique magna sit amet purus. Scelerisque eu ultrices vitae auctor eu augue ut lectus. Vitae nunc sed velit dignissim sodales. Vitae turpis massa sed elementum tempus egestas. Condimentum id venenatis a condimentum.',
+        multimediaType: 1, //0=none 1=jpg 2=png 3=video
+        multimediaPosition: 1, //1=full 2=left 3=right
+        multimedia: "imagen1"
+      },
+      {
+        paragrap: 2,
+        text: 'Nisl condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Ut morbi tincidunt augue interdum velit. Justo eget magna fermentum iaculis eu. At auctor urna nunc id cursus metus aliquam eleifend mi. Feugiat in ante metus dictum. Commodo viverra maecenas accumsan lacus vel facilisis volutpat. In eu mi bibendum neque egestas. Proin fermentum leo vel orci porta non. Id eu nisl nunc mi ipsum faucibus vitae aliquet. In nisl nisi scelerisque eu ultrices. Sed libero enim sed faucibus turpis in eu. Urna neque viverra justo nec ultrices dui sapien eget. Sit amet risus nullam eget felis. Cras ornare arcu dui vivamus arcu felis bibendum. Enim praesent elementum facilisis leo vel. Integer vitae justo eget magna fermentum iaculis eu. Sed vulputate odio ut enim.',
+        multimediaType: 2,
+        multimediaPosition: 2,
+        multimedia: "imagen2"
+      },
+      {
+        paragrap: 3,
+        text: 'Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi. Mi ipsum faucibus vitae aliquet nec. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum. Eu volutpat odio facilisis mauris sit amet massa. Nulla facilisi morbi tempus iaculis urna id. Scelerisque purus semper eget duis at tellus at urna condimentum. Cras semper auctor neque vitae. Id nibh tortor id aliquet. Volutpat consequat mauris nunc congue nisi vitae suscipit. Etiam erat velit scelerisque in. Leo vel orci porta non pulvinar neque laoreet. Pellentesque habitant morbi tristique senectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo vel.',
+        multimediaType: 3,
+        multimediaPosition: 3,
+        multimedia: "imagen3"
+      }
+    ],
+    views: 10,
+    fecha: '2022-12-31T22:24:19.553Z'
+  },
+  {
+    _id: '625b8921aa25c183d8948709',
+    title: 'blog 3',
+    content: [
+      {
+        paragrap: 1,
+        text: 'Scelerisque viverra mauris in aliquam. Diam volutpat commodo sed egestas. Elementum nisi quis eleifend quam. Nec sagittis aliquam malesuada bibendum arcu vitae elementum. Consectetur a erat nam at lectus urna duis. Suspendisse faucibus interdum posuere lorem ipsum dolor. Purus gravida quis blandit turpis cursus in hac habitasse. Netus et malesuada fames ac. Egestas purus viverra accumsan in nisl nisi. Pretium vulputate sapien nec sagittis. Adipiscing elit pellentesque habitant morbi tristique senectus. Magna fringilla urna porttitor rhoncus dolor. Felis bibendum ut tristique et egestas quis. Faucibus in ornare quam viverra orci sagittis eu volutpat odio. Non quam lacus suspendisse faucibus.',
+        multimediaType: 1,
+        multimediaPosition: 1,
+        multimedia: "imagen1"
+      },
+      {
+        paragrap: 2,
+        text: 'Elit at imperdiet dui accumsan sit amet nulla. Mauris cursus mattis molestie a iaculis. Ultricies mi eget mauris pharetra et ultrices neque. Ac orci phasellus egestas tellus rutrum tellus pellentesque eu. Diam sit amet nisl suscipit. Adipiscing diam donec adipiscing tristique. Etiam erat velit scelerisque in. Aliquam vestibulum morbi blandit cursus risus at ultrices mi. Commodo nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Arcu non sodales neque sodales ut etiam sit. Dui faucibus in ornare quam viverra. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan. Mauris nunc congue nisi vitae suscipit tellus mauris a. Sit amet risus nullam eget felis. Cursus vitae congue mauris rhoncus aenean vel elit.',
+        multimediaType: 0,
+        multimediaPosition: 1,
+        multimedia: ""
+      }
+    ],
+    views: 9,
+    fecha: '2023-01-25T12:14:09.553Z'
   },
 ]
