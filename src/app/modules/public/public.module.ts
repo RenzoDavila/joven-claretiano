@@ -8,6 +8,7 @@ import { BlogComponent } from './components/blog/blog.component';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { BlogPostComponent } from './components/blog-post/blog-post.component';
 
 
 
@@ -19,7 +20,8 @@ import { FooterComponent } from './components/footer/footer.component';
     AboutComponent,
     BlogComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BlogPostComponent
   ],
   imports: [
     CommonModule,

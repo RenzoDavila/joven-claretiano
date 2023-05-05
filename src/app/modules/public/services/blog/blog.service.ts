@@ -31,6 +31,11 @@ export class BlogService {
     this.data = undefined;
   }
 
+  getBlog(id: string): Observable<any> {
+    return of((this.blogLocal).filter((t: { _id: string; }) => t._id == id)[0]);
+    // return this.http.get(this.url + id);
+  }
+
   getBlogs(): Observable<any> {
     return of(this.blogLocal);
     // return this.http.get(this.url);
@@ -44,6 +49,18 @@ export class BlogService {
   getPopularBlogs(): Observable<any> {
     return of(this.popularBlogLocal);
     // return this.http.get(this.url);
+  }
+
+  deleteJugador(id: string): Observable<any> {
+    return this.http.delete(this.url + id);
+  }
+
+  saveJugador(jugador: any): Observable<any> {
+    return this.http.post(this.url, jugador);
+  }
+
+  editJugador(id: string, jugador: any): Observable<any> {
+    return this.http.put(this.url + id, jugador);
   }
 
 }

@@ -25,7 +25,12 @@ export const BlogLocal = [
         multimedia: "imagen3"
       }
     ],
-    views: 10,
+    tag:
+    {
+      detail: "Comunidad",
+      color: "#64d04d"
+    },
+    views:  10,
     fecha: '2022-12-31T22:24:19.553Z'
   },
   {
@@ -47,7 +52,12 @@ export const BlogLocal = [
         multimedia: "imagen3"
       }
     ],
-    views: 1,
+    tag:
+    {
+      detail: "Noticias",
+      color: "#5b62f4"
+    },
+    views:  1,
     fecha: '2023-01-15T12:14:09.553Z'
   },
   {
@@ -69,7 +79,12 @@ export const BlogLocal = [
         multimedia: ""
       }
     ],
-    views: 2,
+    tag:
+    {
+      detail: "Comunidad",
+      color: "#64d04d"
+    },
+    views:  2,
     fecha: '2023-01-20T12:14:09.553Z'
   },
   {
@@ -91,7 +106,12 @@ export const BlogLocal = [
         multimedia: ""
       }
     ],
-    views: 9,
+    tag:
+    {
+      detail: "Blog",
+      color: "#fd7e14"
+    },
+    views:  9,
     fecha: '2023-01-25T12:14:09.553Z'
   },
   {
@@ -113,7 +133,12 @@ export const BlogLocal = [
         multimedia: ""
       }
     ],
-    views: 0,
+    tag:
+    {
+      detail: "Blog",
+      color: "#fd7e14"
+    },
+    views:  0,
     fecha: '2023-01-31T12:14:09.553Z'
   },
   {
@@ -135,7 +160,12 @@ export const BlogLocal = [
         multimedia: ""
       }
     ],
-    views: 0,
+    tag:
+    {
+      detail: "Comunidad",
+      color: "#64d04d"
+    },
+    views:  0,
     fecha: '2023-02-05T12:14:09.553Z'
   },
   {
@@ -157,7 +187,12 @@ export const BlogLocal = [
         multimedia: ""
       }
     ],
-    views: 6,
+    tag:
+    {
+      detail: "Blog",
+      color: "#fd7e14"
+    },
+    views:  6,
     fecha: '2023-02-13T12:14:09.553Z'
   },
   {
@@ -179,7 +214,12 @@ export const BlogLocal = [
         multimedia: ""
       }
     ],
-    views: 0,
+    tag:
+    {
+      detail: "Noticias",
+      color: "#5b62f4"
+    },
+    views:  0,
     fecha: '2023-02-19T12:14:09.553Z'
   },
   {
@@ -201,7 +241,12 @@ export const BlogLocal = [
         multimedia: "imagen1"
       }
     ],
-    views: 2,
+    tag:
+    {
+      detail: "Blog",
+      color: "#fd7e14"
+    },
+    views:  2,
     fecha: '2023-03-10T12:14:09.553Z'
   },
   {
@@ -223,7 +268,12 @@ export const BlogLocal = [
         multimedia: "imagen2"
       }
     ],
-    views: 0,
+    tag:
+    {
+      detail: "Comunidad",
+      color: "#64d04d"
+    },
+    views:  0,
     fecha: '2023-03-29T12:14:09.553Z'
   },
 ]
@@ -248,7 +298,12 @@ export const LastBlogLocal = [
         multimedia: "imagen1"
       }
     ],
-    views: 2,
+    tag:
+    {
+      detail: "Blog",
+      color: "#fd7e14"
+    },
+    views:  2,
     fecha: '2023-03-10T12:14:09.553Z'
   },
   {
@@ -270,7 +325,12 @@ export const LastBlogLocal = [
         multimedia: "imagen2"
       }
     ],
-    views: 0,
+    tag:
+    {
+      detail: "Comunidad",
+      color: "#64d04d"
+    },
+    views:  0,
     fecha: '2023-03-29T12:14:09.553Z'
   },
 ]
@@ -302,7 +362,12 @@ export const PopularBlogLocal = [
         multimedia: "imagen3"
       }
     ],
-    views: 10,
+    tag:
+    {
+      detail: "Comunidad",
+      color: "#64d04d"
+    },
+    views:  10,
     fecha: '2022-12-31T22:24:19.553Z'
   },
   {
@@ -324,7 +389,12 @@ export const PopularBlogLocal = [
         multimedia: ""
       }
     ],
-    views: 9,
+    tag:
+    {
+      detail: "Blog",
+      color: "#fd7e14"
+    },
+    views:  9,
     fecha: '2023-01-25T12:14:09.553Z'
   },
 ]
