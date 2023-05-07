@@ -24,7 +24,7 @@
       </div>
     </nav>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 principal">
-      <div *ngIf="!collapse" class="w-100 div-collapse-down"></div>
+      <div *ngIf="!collapse" class="w-100 d-md-none div-collapse-down"></div>
       <a *ngIf="!collapse" (click)="changeCollapse(true)" class="d-md-none btn-collapse-down" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <svg viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>
       </a>

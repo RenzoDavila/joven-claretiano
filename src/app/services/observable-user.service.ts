@@ -3,16 +3,15 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/observables/user.model';
 
 const user: User = {
-  // codigo: "",
-  codigo: "admin",
-  nombre: "nombre admin",
-  password: "123",
-  estado: "super admin",
+  codigo: "",
+  nombre: "",
+  password: "",
+  estado: "",
   permisos: {
-    ver: true,
-    crear: true,
-    editar: true,
-    eliminar: true
+    ver: false,
+    crear: false,
+    editar: false,
+    eliminar: false
   }
 }
 

@@ -29,8 +29,8 @@
           </li>
         </ul>
         <div>
-          <button *ngIf="this.userData.codigo == ''" type="button" class="btn btn-warning">Iniciar sesión</button>
-          <div class="dropdown">
+          <button *ngIf="this.userData.codigo == ''" type="button" class="btn btn-warning" (click)="openSesion()">Iniciar sesión</button>
+          <div  *ngIf="this.userData.codigo != ''" class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="assets/private/imgs/usuario.png" alt="" class="rounded-circle me-2" width="32" height="32">
               <strong>{{this.userData.nombre | titlecase}}</strong>
@@ -39,7 +39,7 @@
               <li><a class="dropdown-item" style="pointer-events: none !important; ">{{this.userData.estado | titlecase}}</a></li>
               <li><a class="dropdown-item" href="#">Configuración</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+              <li (click)="closeSesion()"><a class="dropdown-item pointer">Cerrar sesión</a></li>
             </ul>
           </div>
         </div>

@@ -30,7 +30,6 @@ export class HomeComponent {
   getLastBlogs() {
     this._blogService.getLastBlogs().subscribe(
       (data) => {
-        console.log("data", data)
         this.lastBlogs = data
         this.toastr.success('Excito!!!', 'blogs recientes cargados correctamente')
 
@@ -44,7 +43,6 @@ export class HomeComponent {
   getPopularBlogs() {
     this._blogService.getPopularBlogs().subscribe(
       (data) => {
-        console.log("data", data)
         this.popularBlogs = data
         this.toastr.success('Excito!!!', 'blogs populares cargados correctamente')
 

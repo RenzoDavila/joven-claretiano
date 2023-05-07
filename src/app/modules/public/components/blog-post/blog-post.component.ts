@@ -24,7 +24,6 @@ export class BlogPostComponent implements OnInit {
   getBlog(id: string){
     this._blogService.getBlog(id).subscribe(
       (data) => {
-        console.log("data", data)
         this.blog = data
         this.blog.fechaFormat = moment(new Date(this.blog.fecha)).format('MMM Do [Del] YYYY [a las] hh:mm:ss');
 

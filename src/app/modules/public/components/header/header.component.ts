@@ -9,6 +9,19 @@ import { ObservableUserServices } from 'src/app/services/observable-user.service
   styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent {
+  initialUserData: User =
+  {
+    codigo: "",
+    nombre: "",
+    password: "",
+    estado: "",
+    permisos: {
+      ver: false,
+      crear: false,
+      editar: false,
+      eliminar: false
+    }
+  };
   userData!: User;
 
   constructor(private observableUserServices:ObservableUserServices, public router: Router) {
@@ -19,6 +32,29 @@ export class HeaderComponent {
     if (this.router.url.includes('/dashboard') && this.userData.codigo == '') {
       this.router.navigate(['/']);
     }
+  }
+
+  closeSesion(){
+    this.observableUserServices.setUser(this.initialUserData)
+    this.router.navigate(['/']);
+  }
+
+  openSesion(){
+    const user: User = {
+      // codigo: "",
+      codigo: "admin",
+      nombre: "nombre admin",
+      password: "123",
+      estado: "super admin",
+      permisos: {
+        ver: true,
+        crear: true,
+        editar: true,
+        eliminar: true
+      }
+    }
+    this.observableUserServices.setUser(user)
+    this.router.navigate(['/']);
   }
 
 }

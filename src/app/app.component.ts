@@ -14,13 +14,5 @@ export class AppComponent {
 
   constructor(private observableUserServices:ObservableUserServices) {
     this.observableUserServices.selectedUser$.subscribe((observableUser: User) => this.userData = observableUser);
-
-    if (this.userData.codigo != '') {
-      console.log("this.userData", this.userData)
-      this.dashboard = true;
-    }else {
-      console.log("no hay usuario", this.userData)
-      this.dashboard = false;
-    }
   }
 }

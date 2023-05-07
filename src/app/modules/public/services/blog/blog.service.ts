@@ -9,7 +9,7 @@ import { BlogLocal, LastBlogLocal, PopularBlogLocal } from '../../data/constants
   providedIn: 'root'
 })
 export class BlogService {
-  url = environment.server + 'blog/';
+  url = environment.server + 'blogs/';
   blogLocal:any = BlogLocal;
   lastBlogLocal:any = LastBlogLocal;
   popularBlogLocal:any = PopularBlogLocal;
@@ -55,8 +55,8 @@ export class BlogService {
     return this.http.delete(this.url + id);
   }
 
-  saveJugador(jugador: any): Observable<any> {
-    return this.http.post(this.url, jugador);
+  saveJugador(blog: any): Observable<any> {
+    return this.http.post(this.url, blog);
   }
 
   editJugador(id: string, jugador: any): Observable<any> {

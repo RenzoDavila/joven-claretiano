@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  server: "https://fdpb.up.railway.app/"
+  // server: "https://fdpb.up.railway.app/"
+  server: "localhost:4000/api/"
 };
 
 /*
