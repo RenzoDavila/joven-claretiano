@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PublicModule } from './modules/public/public.module';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { PrivateModule } from './modules/private/private.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    PublicModule
+    PublicModule,
+    PrivateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

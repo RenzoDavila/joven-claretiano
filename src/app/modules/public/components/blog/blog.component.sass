@@ -10,8 +10,22 @@
   height: 250px
   width: 200px
 
-.blog-img
-  max-height: 100%
-  width: auto
+@media screen and (min-width: 1200px)
+  .blog-img
+    width: auto
+    max-height: 250px
+    min-height: 100%
+    min-width: 100%
 
+@media screen and (max-width: 1199px)
+  .blog-img-div
+    width: 100%
 
+  .card-text
+    width: 100%
+
+  .blog-img
+    height: auto
+    max-width: 200px
+    min-width: 100%
+    min-height: 100%

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/observables/user.model';
+import { ObservableUserServices } from 'src/app/services/observable-user.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent {
-  constructor(public router: Router) {}
+  userData!: User;
+
+  constructor(private observableUserServices:ObservableUserServices, public router: Router) {
+    this.observableUserServices.selectedUser$.subscribe((observableUser: User) => this.userData = observableUser);
+  }
 
   ngOnInit(): void {
-    console.log("router", this.router.url)
+    if (this.router.url.includes('/dashboard') && this.userData.codigo == '') {
+      this.router.navigate(['/']);
+    }
   }
 
 }

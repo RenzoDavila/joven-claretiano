@@ -1,3 +1,38 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+
+<div *ngIf="router.url.includes('/dashboard')" class="container-fluid" style="margin-top: 1rem;">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 p-md-0 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-md-2 pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item" [ngClass]="{'active' : router.url === '/dashboard/blogs'}" [routerLink]="['/dashboard/blogs']">
+            <a class="nav-link">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file" aria-hidden="true"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+              Blogs
+            </a>
+          </li>
+          <li class="nav-item" [ngClass]="{'active' : router.url === '/dashboard/users'}" [routerLink]="['/dashboard/users']">
+            <a class="nav-link">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              Usuarios
+            </a>
+          </li>
+          <a *ngIf="collapse" (click)="changeCollapse(false)" class="d-md-none btn-collapse-up" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <svg viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>
+          </a>
+        </ul>
+      </div>
+    </nav>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 principal">
+      <div *ngIf="!collapse" class="w-100 div-collapse-down"></div>
+      <a *ngIf="!collapse" (click)="changeCollapse(true)" class="d-md-none btn-collapse-down" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>
+      </a>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+<router-outlet *ngIf="!router.url.includes('/dashboard')"></router-outlet>
+
+<app-footer *ngIf="!router.url.includes('/dashboard')"></app-footer>

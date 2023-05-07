@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="text-center">
+  <main class="form-signin">
+    <form>
+      <img class="mb-4" src="assets/icono.png" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 fw-normal">Bienvenido al sistema de administración</h1>
+
+      <div class="form-floating">
+        <input type="text" class="form-control" id="user" placeholder="Usuario">
+        <label for="floatingInput">Usuario</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="pass" placeholder="Contraseña">
+        <label for="floatingPassword">Contraseña</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-outline-primary" type="submit" (click)="login()">Ingresar</button>
+      <button class="w-100 btn btn-lg btn-outline-secondary" type="submit" (click)="cancel()">Cancelar</button>
+
+      <p class="mt-5 mb-3 text-muted">© 2023 joven-claretiano, blog</p>
+    </form>
+  </main>
+</div>

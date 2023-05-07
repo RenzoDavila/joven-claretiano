@@ -2,8 +2,8 @@
   <div class="row p-4 p-md-5 mb-4 mt-3">
     <div class="col-md-8">
       <article class="blog-post">
-        <h2 class="blog-post-title">{{blog.title}}</h2>
-        <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p>
+        <h2 class="blog-post-title display-5">{{blog.title | titlecase}}</h2>
+        <p class="blog-post-meta">{{blog.fechaFormat}}</p>
 
         <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
         <hr>
@@ -117,8 +117,7 @@
       </article>
 
       <nav class="blog-pagination" aria-label="Pagination">
-        <a class="btn btn-outline-primary" href="#">Older</a>
-        <a class="btn btn-outline-secondary disabled">Newer</a>
+        <a class="btn btn-outline-primary" href="#">Ver Todos Los Blogs</a>
       </nav>
 
     </div>

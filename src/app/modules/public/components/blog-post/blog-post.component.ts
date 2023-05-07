@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from '../../services/blog/blog.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-blog-post',
@@ -16,6 +17,7 @@ export class BlogPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    moment.locale('es')
     this.getBlog(this.id);
   }
 
@@ -24,6 +26,7 @@ export class BlogPostComponent implements OnInit {
       (data) => {
         console.log("data", data)
         this.blog = data
+        this.blog.fechaFormat = moment(new Date(this.blog.fecha)).format('MMM Do [Del] YYYY [a las] hh:mm:ss');
 
       },
       (error) => {

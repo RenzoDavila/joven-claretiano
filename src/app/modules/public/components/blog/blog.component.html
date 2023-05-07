@@ -1,13 +1,13 @@
 <main class="container">
   <div class="row p-4 p-md-5 mb-4">
-    <h2 class="blog-post-title py-4 display-6 text-center">Blogs del joven claretiano</h2>
+    <h2 class="blog-post-title py-4 display-5 fw-bold text-center">Blogs del joven claretiano</h2>
 
     <div *ngFor="let blog of blogs" class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2" [style]="'color:'+ blog.tag.color">{{blog.tag.detail}}</strong>
           <h3 class="mb-0">{{blog.title}}</h3>
-          <div class="mb-1 text-muted">{{blog.fecha}}</div>
+          <div class="mb-1 text-muted">{{blog.fechaFormat}}</div>
           <p class="card-text mb-auto" >{{blog.content[0].text}}</p>
           <a href="/blog-post/{{blog._id}}" class="stretched-link">Seguir leyendo...</a>
         </div>

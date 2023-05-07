@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BlogService } from '../../services/blog/blog.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-blog',
@@ -20,8 +21,13 @@ export class BlogComponent {
   getBlogs() {
     this._blogService.getBlogs().subscribe(
       (data) => {
-        console.log("data", data)
         this.blogs = data
+
+        this.blogs!.map((item: any) => {
+          console.log("item.fecha", item.fecha)
+          item.fechaFormat = moment(new Date(item.fecha)).format('YYYY-MM-DD hh:mm:ss');
+        })
+        console.log("this.blogs", this.blogs)
 
       },
       (error) => {
