@@ -8,7 +8,7 @@ import { BlogLocal, LastBlogLocal, PopularBlogLocal } from '../../data/constants
 @Injectable({
   providedIn: 'root'
 })
-export class BlogService {
+export class BlogCrudService {
   url = environment.server + 'blogs/';
   blogLocal:any = BlogLocal;
   lastBlogLocal:any = LastBlogLocal;
@@ -49,5 +49,17 @@ export class BlogService {
   getPopularBlogs(): Observable<any> {
     return of(this.popularBlogLocal);
     // return this.http.get(this.url);
+  }
+
+  deleteJugador(id: string): Observable<any> {
+    return this.http.delete(this.url + id);
+  }
+
+  saveJugador(blog: any): Observable<any> {
+    return this.http.post(this.url, blog);
+  }
+
+  editJugador(id: string, jugador: any): Observable<any> {
+    return this.http.put(this.url + id, jugador);
   }
 }

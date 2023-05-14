@@ -8,6 +8,7 @@ import { AboutComponent } from './modules/public/components/about/about.componen
 import { BlogVerComponent } from './modules/private/components/blog/blog-ver/blog-ver.component';
 import { LoginComponent } from './components/login/login.component';
 import { UsuarioVerComponent } from './modules/private/components/usuario/usuario-ver/usuario-ver.component';
+import { BlogCrearEditarComponent } from './modules/private/components/blog/blog-crear-editar/blog-crear-editar.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,6 +26,8 @@ const routes: Routes = [
     path: 'dashboard',
     children: [
       { path: 'blogs', component: BlogVerComponent},
+      { path: 'crear-blog', component: BlogCrearEditarComponent},
+      { path: 'editar-blog/:id', component: BlogCrearEditarComponent},
       { path: 'users', component: UsuarioVerComponent},
       { path: '**', redirectTo: 'blogs', pathMatch: 'full' },
     ]

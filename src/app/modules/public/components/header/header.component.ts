@@ -29,12 +29,16 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    if (this.router.url.includes('/dashboard') && this.userData.codigo == '') {
+  }
+
+  ngAfterViewInit(): void{
+    if (this.userData.codigo == '') {
       this.router.navigate(['/']);
     }
   }
 
   closeSesion(){
+    console.log("includes", this.router.url.includes('/dashboard'))
     this.observableUserServices.setUser(this.initialUserData)
     this.router.navigate(['/']);
   }

@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { BlogService } from '../../services/blog/blog.service';
 import { ToastrService } from 'ngx-toastr';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass']
+  styleUrls: ['./home.component.sass'],
+  providers: [ServicesService]
 })
 export class HomeComponent {
   blogs:any;
@@ -14,11 +16,32 @@ export class HomeComponent {
 
   constructor(
     private _blogService: BlogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private servicesService: ServicesService
   ){ }
 
   ngOnInit(): void {
     this.getBlogs();
+
+    this.servicesService.getTags().subscribe(
+      (data) => {
+        console.log("servicesService", data)
+      },
+
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.servicesService.postTag().subscribe(
+      (data) => {
+        console.log("servicesService", data)
+      },
+
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getBlogs() {

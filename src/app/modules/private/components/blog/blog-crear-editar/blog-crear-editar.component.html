@@ -1,1 +1,78 @@
-<p>blog-crear-editar works!</p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2 title-dashboard">Crear Blog</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <button type="button" class="btn btn-outline-danger"  [routerLink]="['/dashboard/blogs']">Cancelar</button>
+  </div>
+</div>
+
+<div class="col-lg-6 mx-auto">
+  <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <span> Nuevo </span>
+        <div>
+          <img src="assets/private/imgs/subir-multimedia.png" class="pointer" alt="No image" height="32" width="32" (click)="openModal();">
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form">
+            <div class="form-group">
+                <input formControlName="titulo" id="titulo" ype="text" class="form-control" placeholder="Titulo">
+            </div>
+
+            <div class="form-group d-flex justify-content-between">
+                <button *ngIf="imageExist('description')"  type="button" class="btn btn-outline-danger btn-minus" (click)="dropImg('description')"><i class="bi bi-x-lg btn-minus-icon"></i></button>
+                <img *ngIf="imageExist('description')" [src]="getImage('description')" class="img-preview" alt="No image">
+                <textarea formControlName="description" id="description" rows="3" class="form-control" placeholder="Descripción"></textarea>
+            </div>
+
+            <div *ngFor="let item of [].constructor(descriptions); let i = index" class="form-group d-flex justify-content-between">
+                <button *ngIf="imageExist('description'+(i+1))"  type="button" class="btn btn-outline-danger btn-minus" (click)="dropImg('description'+(i+1))"><i class="bi bi-x-lg btn-minus-icon"></i></button>
+                <img *ngIf="imageExist('description'+(i+1))" [src]="getImage('description'+(i+1))" class="img-preview" alt="No image">
+                <textarea [formControlName]="'description'+(i+1)"  [id]="'description'+(i+1)" rows="3" class="form-control" [ngClass]="{'form-description': descriptions == i+1}" [placeholder]="'Descripción +'+(i+1)"></textarea>
+                <button *ngIf="descriptions == i+1" type="button" class="btn btn-outline-danger btn-trash" (click)="onDelete('description'+(i+1))"><i class="bi bi-trash3-fill"></i></button>
+            </div>
+
+            <div class="form-group d-flex justify-content-start">
+              <button *ngIf="descriptions < maxDescriptions" type="button" class="btn btn-info btn-plus" (click)="onAdd(); focus()"><i class="bi bi-plus-circle btn-plus-icon"></i></button>
+            </div>
+
+        </form>
+      </div>
+      <div class="card-footer d-flex justify-content-center">
+        <button class="btn btn-outline-success btn-block" [disabled]="form.invalid" [ngClass]="{'disabled-btn': form.invalid}" (click)="onSubmit()">
+          Crear
+        </button>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="modal" id="source-modal" class="modal fade show" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
+  <div class="modal-bg" (click)="modal = false"></div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Subir multimedia</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formModal">
+        <div class="form-group">
+          <select class="form-select form-select-lg mb-3" formControlName="descriptionSelect" id="descriptionSelect">
+            <option value="">Seleccione Un Descripción</option>
+            <option value="description">Descripción</option>
+            <option *ngFor="let item of [].constructor(descriptions); let i = index" [value]="'description'+(i+1)">Descripción +{{i+1}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="file" class="d-none" (change)="onMultimediaSelected($event)" formControlName="multimediaInput" #multimediaInput>
+          <img *ngIf="!multimediaSelected" src="assets/private/imgs/no-image.png" class="img-fluid" alt="No image" (click)="multimediaInput.click()">
+          <img *ngIf="multimediaSelected" [src]="multimedia" class="img-fluid" alt="No image" (click)="multimediaInput.click()">
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-danger btn-plus" (click)="modal = false"><i class="bi bi-x-circle-fill btn-plus-icon"></i></button>
+        <button type="button" class="btn btn-outline-primary btn-plus" [disabled]="formModal.invalid" (click)="onMultimediaSave()"><i class="bi bi-check-circle-fill btn-plus-icon"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

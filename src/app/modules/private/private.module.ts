@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -23,7 +24,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent

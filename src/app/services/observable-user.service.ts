@@ -2,16 +2,29 @@ import { BehaviorSubject, observable, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { User } from '../models/observables/user.model';
 
+// const user: User = {
+//   codigo: "",
+//   nombre: "",
+//   password: "",
+//   estado: "",
+//   permisos: {
+//     ver: false,
+//     crear: false,
+//     editar: false,
+//     eliminar: false
+//   }
+// }
+
 const user: User = {
-  codigo: "",
-  nombre: "",
-  password: "",
-  estado: "",
+  codigo: "admin",
+  nombre: "nombre admin",
+  password: "123",
+  estado: "super admin",
   permisos: {
-    ver: false,
-    crear: false,
-    editar: false,
-    eliminar: false
+    ver: true,
+    crear: true,
+    editar: true,
+    eliminar: true
   }
 }
 
