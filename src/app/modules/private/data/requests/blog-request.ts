@@ -5,5 +5,6 @@ export class IBlogRequest {
   views?:number;
   content?: [IBlogContentRequest];
   tag?: string;
-  fecha?: string;
+  fecha?: Date;
+  files?:any
 }

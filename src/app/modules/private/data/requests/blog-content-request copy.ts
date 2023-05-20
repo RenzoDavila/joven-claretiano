@@ -3,5 +3,5 @@ export class IBlogContentRequest {
   text?: string;
   multimediaType?: string; //N=none I=imagen V=video
   multimediaPosition?: string; //F=full L=left R=right
-  imagePath?: string
+  file?: any;
 }

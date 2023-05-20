@@ -22,26 +22,6 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.getBlogs();
-
-    this.servicesService.getTags().subscribe(
-      (data) => {
-        console.log("servicesService", data)
-      },
-
-      (error) => {
-        console.log(error);
-      }
-    );
-
-    this.servicesService.postTag().subscribe(
-      (data) => {
-        console.log("servicesService", data)
-      },
-
-      (error) => {
-        console.log(error);
-      }
-    );
   }
 
   getBlogs() {

@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from 'src/app/modules/public/services/blog/blog.service';
 import { IBlogRequest } from '../../../data/requests/blog-request';
 import { GeneralService } from '../../../services/general/general.service';
+import { IBlogContentRequest } from '../../../data/requests/blog-content-request copy';
+import { BlogCrudService } from '../../../services/blog-crud/blog-crud.service';
 
 @Component({
   selector: 'app-blog-crear-editar',
@@ -11,6 +13,7 @@ import { GeneralService } from '../../../services/general/general.service';
   styleUrls: ['./blog-crear-editar.component.sass']
 })
 export class BlogCrearEditarComponent {
+  fd = new FormData();
   id: string | null;
   form: FormGroup;
   formModal: FormGroup;
@@ -18,6 +21,7 @@ export class BlogCrearEditarComponent {
   multimediaSelected: boolean = false;
   multimedia: string | ArrayBuffer | null = null;
   file: File | undefined;
+  files:any = [];
   maxDescriptions: number = 9;
   descriptions: number = 0;
   imgsArray:any = [];
@@ -29,21 +33,23 @@ export class BlogCrearEditarComponent {
         text: "",
         multimediaType: "", //N=none I=imagen V=video
         multimediaPosition: "", //F=full L=left R=right
-        imagePath: ""
+        file: ""
     }],
     tag: "",
-    fecha: "",
+    fecha: new Date(),
   };
-  tags!: [];
+  tags!:any [];
 
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
+    private blogCrudService: BlogCrudService,
     private generalService: GeneralService,
     private aRoute: ActivatedRoute,
     private router: Router) {
       this.form = this.fb.group({
         titulo: ['', Validators.required],
+        tagSelect: ['645fd9bb7613ca2100243b13', Validators.required],
         description: ['', Validators.required],
         description1: [''],
         description2: [''],
@@ -59,10 +65,12 @@ export class BlogCrearEditarComponent {
       this.formModal = this.fb.group({
         descriptionSelect: ['', Validators.required],
         multimediaInput: ['', Validators.required],
+        multimediaPosition: ['', Validators.required],
         file: [''],
         multimedia: [''],
       });
       this.id = this.aRoute.snapshot.paramMap.get('id');
+      this.fd = new FormData();
     }
 
   ngOnInit() {
@@ -72,12 +80,12 @@ export class BlogCrearEditarComponent {
 
   initialize(){
     this.getTags();
+    this.fd = new FormData();
   }
 
   getTags(){
     this.generalService.getTags().subscribe(
       (data) => {
-        console.log("tags", data)
         this.tags = data
       },
 
@@ -165,6 +173,9 @@ export class BlogCrearEditarComponent {
   onMultimediaSave(){
     this.formModal.get('file')?.setValue(this.file)
     this.formModal.get('multimedia')?.setValue(this.multimedia)
+    let file:any = this.file
+    file.descriptionSelect = this.formModal.controls['descriptionSelect'].value
+    this.files.push(file)
 
     const listFiltered = this.imgsArray.filter((t: { descriptionSelect: string; }) => t.descriptionSelect == this.formModal.controls['descriptionSelect'].value);
 
@@ -172,8 +183,10 @@ export class BlogCrearEditarComponent {
       if(img.descriptionSelect == this.formModal.controls['descriptionSelect'].value){
         img.descriptionSelect = this.formModal.controls['descriptionSelect'].value
         img.multimediaInput = this.formModal.controls['multimediaInput'].value
+        img.position = this.formModal.controls['multimediaPosition'].value
         img.file = this.formModal.controls['file'].value
         img.multimedia = this.formModal.controls['multimedia'].value
+
       }
     });
 
@@ -183,11 +196,13 @@ export class BlogCrearEditarComponent {
 
     this.multimediaSelected = false;
     this.modal = false;
+    this.blogRequest.files = this.files
 
     this.formModal.get('descriptionSelect')?.setValue("")
     this.formModal.get('multimediaInput')?.setValue("")
     this.formModal.get('file')?.setValue("")
     this.formModal.get('multimedia')?.setValue("")
+    this.formModal.get('multimediaPosition')?.setValue("")
 
   }
 
@@ -214,10 +229,108 @@ export class BlogCrearEditarComponent {
 
   dropImg(description: string){
     this.imgsArray = this.imgsArray.filter((t: { descriptionSelect: string; }) => t.descriptionSelect != description);
+    this.files = this.files.filter((t: { descriptionSelect: string; }) => t.descriptionSelect != description);
+    this.blogRequest.files = this.files
   }
 
   onSubmit() {
-    this.blogRequest.title = this.form.controls['titulo'].value
-  }
+    let content: IBlogContentRequest = {};
+    let arrayContent:any = [];
+    let count = 1
 
+    const description = this.imgsArray.filter((t: { descriptionSelect: string; }) => t.descriptionSelect === "description");
+
+    content.description = count
+    content.text = this.form.controls['description'].value
+    content.file = ""
+    content.multimediaPosition = ""
+    content.multimediaType =  "N"
+
+    if(description.length > 0){
+      content.file = description[0].file
+      content.multimediaPosition = description[0].multimediaPosition
+      content.multimediaType =  "I"
+    }
+    arrayContent.push(content)
+
+    for (let i = 1; i < 10; i++) {
+      let obj:IBlogContentRequest = {}
+      let desc = this.form.controls['description'+i].value;
+      if(desc){
+        count = count + 1
+        obj.description = count
+        obj.text = desc
+        obj.file = ""
+        obj.multimediaPosition = ""
+        obj.multimediaType =  "N"
+
+        this.imgsArray.map((img:any, index: any) => {
+          if(img.descriptionSelect == 'description'+i){
+            obj.file = img.file
+            obj.multimediaPosition = img.multimediaPosition
+            obj.multimediaType =  "I"
+          }
+        });
+
+        arrayContent.push(obj)
+      }
+
+    }
+
+    this.blogRequest.title = this.form.controls['titulo'].value
+    this.blogRequest.views = 0
+    this.blogRequest.content = arrayContent
+    this.blogRequest.tag = this.form.controls['tagSelect'].value
+    this.blogRequest.fecha = new Date()
+
+    this.fd.append('title', this.form.controls['titulo'].value);
+    this.fd.append('views', "0");
+    this.fd.append('tag', this.form.controls['tagSelect'].value);
+    this.fd.append('fecha', (new Date()).toString());
+
+
+    let countContent = 0;
+    arrayContent.map((content:any, index: any) => {
+      this.fd.append(`content[${index}][description]`, content.description);
+      this.fd.append(`content[${index}][text]`, content.text);
+      this.fd.append(`content[${index}][multimediaType]`, content.multimediaType);
+      this.fd.append(`content[${index}][multimediaPosition]`, content.multimediaPosition);
+      if(content.file.descriptionSelect){
+        this.fd.append(`content[${index}][file]`, `files${countContent}`);
+        countContent = countContent + 1
+      }else{
+        this.fd.append(`content[${index}][file]`, ``);
+      }
+    });
+
+    this.blogRequest.files.sort((a:any, b:any) => {
+      let fa = a.descriptionSelect!.toLowerCase(),
+          fb = b.descriptionSelect!.toLowerCase();
+
+      if (fa < fb) {
+          return -1;
+      }
+      if (fa > fb) {
+          return 1;
+      }
+      return 0;
+    });
+
+    for (let i = 0; i < this.blogRequest.files.length; i++) {
+      this.fd.append(`files${i}`, this.blogRequest.files[i]);
+      if(i+1 == this.blogRequest.files.length){
+        this.blogCrudService.saveJugador(this.fd).subscribe(
+          (data) => {
+            console.log("data", data);
+            this.router.navigateByUrl('/dashboard/blogs')
+          },
+
+          (error) => {
+            console.log(error);
+            this.router.navigateByUrl('/dashboard/blogs')
+          }
+        );
+      }
+    }
+  }
 }

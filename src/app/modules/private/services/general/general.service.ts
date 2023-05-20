@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class GeneralService {
-  urlTag = environment.server + 'tags/';
+  urlTag = 'api/tags/';
 
   constructor(private http: HttpClient, private router: Router) { }
   private data:any;

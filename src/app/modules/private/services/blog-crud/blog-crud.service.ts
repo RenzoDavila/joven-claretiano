@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Observable, of } from 'rxjs';
 import { BlogLocal, LastBlogLocal, PopularBlogLocal } from '../../data/constants/BlogLocal.const';
+import { IBlogRequest } from '../../data/requests/blog-request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogCrudService {
-  url = environment.server + 'blogs/';
+  url = 'api/blogs/';
   blogLocal:any = BlogLocal;
   lastBlogLocal:any = LastBlogLocal;
   popularBlogLocal:any = PopularBlogLocal;
@@ -55,8 +56,10 @@ export class BlogCrudService {
     return this.http.delete(this.url + id);
   }
 
-  saveJugador(blog: any): Observable<any> {
-    return this.http.post(this.url, blog);
+  saveJugador(fd:any): Observable<any> {
+    console.log("fd", fd)
+
+    return this.http.post(this.url, fd);
   }
 
   editJugador(id: string, jugador: any): Observable<any> {
