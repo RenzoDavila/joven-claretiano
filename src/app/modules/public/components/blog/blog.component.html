@@ -5,15 +5,19 @@
     <div *ngFor="let blog of blogs" class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2" [style]="'color:'+ blog.tag.color">{{blog.tag.detail}}</strong>
-          <h3 class="mb-0">{{blog.title}}</h3>
+          <div class="background-blog">
+            <a href="/blog-post/{{blog._id}}" class="all-shit"></a>
+            <p class="position-absolute top-0 start-50 translate-middle-x fw-bolder pt-3">Leer más sobre:</p>
+            <p class="position-absolute top-50 start-50 translate-middle fw-bolder">{{blog.title}}</p>
+          </div>
+          <strong class="d-inline-block mb-2" [style]="'color:'+ blog.tag.color">{{blog.tag.title}}</strong>
+          <h3 class="mb-0 d-inline-block text-truncate" style="max-width: 250px;">{{blog.title}}</h3>
           <div class="mb-1 text-muted">{{blog.fechaFormat}}</div>
-          <p class="card-text mb-auto" >{{blog.content[0].text}}</p>
-          <a href="/blog-post/{{blog._id}}" class="stretched-link">Seguir leyendo...</a>
+          <p class="card-text mb-auto">{{blog.content[0].text}} </p>
         </div>
         <div class="col-auto d-none d-lg-block blog-img-div">
-          <img *ngIf="blog.content[0].multimediaType != 0" class="bd-placeholder-img blog-img" alt="{{blog.content[0].multimedia}}" src="assets/public/blogs/{{blog._id}}/{{blog.content[0].multimedia}}.jpg">
-          <img *ngIf="blog.content[0].multimediaType == 0" class="bd-placeholder-img blog-img" alt="default.jpg" src="assets/public/blogs/default.jpg">
+          <img *ngIf="blog.principalImagePath != ''" class="bd-placeholder-img blog-img" alt="{{blog.principalImagePath}}" [src]="urlServer + blog.principalImagePath">
+          <img *ngIf="blog.principalImagePath == ''" class="bd-placeholder-img blog-img" alt="default.jpg" src="assets/public/blogs/default.jpg">
         </div>
       </div>
     </div>

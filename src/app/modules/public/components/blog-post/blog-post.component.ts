@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from '../../services/blog/blog.service';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
+import { GeneralService } from 'src/app/modules/private/services/general/general.service';
 
 @Component({
   selector: 'app-blog-post',
@@ -11,27 +13,98 @@ import * as moment from 'moment';
 export class BlogPostComponent implements OnInit {
   id: any ;
   blog: any;
+  tags:any;
+  lastBlog:any;
+  popularBlogs:any;
+  urlServer = environment.server;
 
-  constructor(private aRoute: ActivatedRoute, private _blogService: BlogService,){
+  constructor(private aRoute: ActivatedRoute, private _blogService: BlogService, private generalService: GeneralService){
     this.id = this.aRoute.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-    moment.locale('es')
-    this.getBlog(this.id);
+    moment.locale('es');
+    this.getTags();
   }
 
-  getBlog(id: string){
-    this._blogService.getBlog(id).subscribe(
+  getTags(){
+    this.generalService.getTags().subscribe(
+      (data) => {
+        this.tags = data;
+        this.getBlogAddView(this.id);
+        this.getLastBlogs();
+        this.getPopularBlogs();
+      },
+
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getBlogAddView(id: string){
+    this._blogService.getBlogAddView(id).subscribe(
       (data) => {
         this.blog = data
         this.blog.fechaFormat = moment(new Date(this.blog.fecha)).format('MMM Do [Del] YYYY [a las] hh:mm:ss');
-
+        const tag = this.tags.filter((t: { _id: string; }) => t._id == this.blog.tag);
+        this.blog.tag = tag;
+        console.log("this.blog", this.blog);
       },
       (error) => {
         console.log(error);
       }
     );
   }
+
+  getLastBlogs() {
+    this._blogService.getLastBlogs(3).subscribe(
+      (data) => {
+        let newData = data;
+        newData.map((item:any, index: any) => {
+          item.fechaFormat = moment(new Date(item.fecha)).format('YYYY-MM-DD hh:mm A');
+
+          const tag = this.tags.filter((t: { _id: string; }) => t._id == item.tag);
+
+          if (tag.length > 0) {
+            item.tag = {color: tag[0].color, description: tag[0].description, title: tag[0].title};
+          };
+
+          if(newData.length == index + 1){
+            this.lastBlog = newData;
+          };
+
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  getPopularBlogs() {
+    this._blogService.getPopularBlogs(3).subscribe(
+      (data) => {
+        let newData = data;
+        newData.map((item:any, index: any) => {
+          item.fechaFormat = moment(new Date(item.fecha)).format('YYYY-MM-DD hh:mm A');
+
+          const tag = this.tags.filter((t: { _id: string; }) => t._id == item.tag);
+
+          if (tag.length > 0) {
+            item.tag = {color: tag[0].color, description: tag[0].description, title: tag[0].title};
+          };
+
+          if(newData.length == index + 1){
+            this.popularBlogs = newData;
+          };
+
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
 
 }

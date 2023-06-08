@@ -1,1 +1,29 @@
-<p>usuario-ver works!</p>
+<div>
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2 title-dashboard">Blogs</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <button type="button" class="btn btn-outline-success"  [routerLink]="['/dashboard/crear-blog']">Crear Nuevo</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Titulo</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Tag</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let blog of blogs">
+          <td>{{blog.title}}</td>
+          <td>{{blog.fechaFormat}}</td>
+          <td>{{blog.horaFormat}}</td>
+          <td>{{blog.tag.title}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

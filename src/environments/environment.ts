@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   // server: "https://fdpb.up.railway.app/"
-  server: "localhost:4000/api/"
+  server: "http://localhost:4000/"
 };
 
 /*

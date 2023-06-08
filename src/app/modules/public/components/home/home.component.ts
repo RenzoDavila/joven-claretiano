@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { BlogService } from '../../services/blog/blog.service';
 import { ToastrService } from 'ngx-toastr';
 import { ServicesService } from 'src/app/services/services.service';
+import * as moment from 'moment';
+import { GeneralService } from 'src/app/modules/private/services/general/general.service';
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,49 +14,82 @@ import { ServicesService } from 'src/app/services/services.service';
   providers: [ServicesService]
 })
 export class HomeComponent {
-  blogs:any;
-  lastBlogs:any;
+  tags:any;
+  lastBlog:any;
   popularBlogs:any;
+  urlServer = environment.server;
 
   constructor(
     private _blogService: BlogService,
     private toastr: ToastrService,
-    private servicesService: ServicesService
+    private generalService: GeneralService,
+    private servicesService: ServicesService,
+    public router: Router
   ){ }
 
   ngOnInit(): void {
-    this.getBlogs();
+    this.getTags();
+  }
+
+  getTags(){
+    this.generalService.getTags().subscribe(
+      (data) => {
+        this.tags = data
+        this.getBlogs();
+      },
+
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getBlogs() {
-    this.toastr.info('cargando...', 'obteniendo los blogs')
+    // this.toastr.info('cargando...', 'obteniendo los blogs')
+    // this.toastr.success('Excito!!!', 'blogs recientes cargados correctamente');
     this.getLastBlogs()
     this.getPopularBlogs()
   }
 
   getLastBlogs() {
-    this._blogService.getLastBlogs().subscribe(
+    this._blogService.getLastBlogs(1).subscribe(
       (data) => {
-        this.lastBlogs = data
-        this.toastr.success('Excito!!!', 'blogs recientes cargados correctamente')
-
+        this.lastBlog = data[0];
+        this.lastBlog.fechaFormat = moment(new Date(this.lastBlog.fecha)).format('YYYY-MM-DD hh:mm A');
       },
       (error) => {
         console.log(error);
       }
     );
-  }
+  };
 
   getPopularBlogs() {
-    this._blogService.getPopularBlogs().subscribe(
+    this._blogService.getPopularBlogs(2).subscribe(
       (data) => {
-        this.popularBlogs = data
-        this.toastr.success('Excito!!!', 'blogs populares cargados correctamente')
+        let newData = data;
+        newData.map((item:any, index: any) => {
+          item.fechaFormat = moment(new Date(item.fecha)).format('YYYY-MM-DD hh:mm A');
 
+          const tag = this.tags.filter((t: { _id: string; }) => t._id == item.tag);
+
+          if (tag.length > 0) {
+            item.tag = {color: tag[0].color, description: tag[0].description, title: tag[0].title};
+          };
+
+          if(newData.length == index+1){
+            this.popularBlogs = newData;
+            console.log("this.popularBlogs", this.popularBlogs)
+          };
+
+        });
       },
       (error) => {
         console.log(error);
       }
     );
+  };
+
+  redirect(ruta: any){
+    this.router.navigate([`/blog-post/${ruta}`]);
   }
 }

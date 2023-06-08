@@ -6,6 +6,7 @@ import { IBlogRequest } from '../../../data/requests/blog-request';
 import { GeneralService } from '../../../services/general/general.service';
 import { IBlogContentRequest } from '../../../data/requests/blog-content-request copy';
 import { BlogCrudService } from '../../../services/blog-crud/blog-crud.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-blog-crear-editar',
@@ -39,6 +40,7 @@ export class BlogCrearEditarComponent {
     fecha: new Date(),
   };
   tags!:any [];
+  disabledOnSubmit: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -46,7 +48,8 @@ export class BlogCrearEditarComponent {
     private blogCrudService: BlogCrudService,
     private generalService: GeneralService,
     private aRoute: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService,) {
       this.form = this.fb.group({
         titulo: ['', Validators.required],
         tagSelect: ['645fd9bb7613ca2100243b13', Validators.required],
@@ -234,6 +237,7 @@ export class BlogCrearEditarComponent {
   }
 
   onSubmit() {
+    this.disabledOnSubmit = true
     let content: IBlogContentRequest = {};
     let arrayContent:any = [];
     let count = 1
@@ -303,34 +307,50 @@ export class BlogCrearEditarComponent {
       }
     });
 
-    this.blogRequest.files.sort((a:any, b:any) => {
-      let fa = a.descriptionSelect!.toLowerCase(),
-          fb = b.descriptionSelect!.toLowerCase();
+    if (this.blogRequest.files) {
+      this.blogRequest.files.sort((a:any, b:any) => {
+        let fa = a.descriptionSelect!.toLowerCase(),
+            fb = b.descriptionSelect!.toLowerCase();
 
-      if (fa < fb) {
-          return -1;
-      }
-      if (fa > fb) {
-          return 1;
-      }
-      return 0;
-    });
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;
+      });
 
-    for (let i = 0; i < this.blogRequest.files.length; i++) {
-      this.fd.append(`files${i}`, this.blogRequest.files[i]);
-      if(i+1 == this.blogRequest.files.length){
-        this.blogCrudService.saveJugador(this.fd).subscribe(
-          (data) => {
-            console.log("data", data);
-            this.router.navigateByUrl('/dashboard/blogs')
-          },
+      for (let i = 0; i < this.blogRequest.files.length; i++) {
+        this.fd.append(`files${i}`, this.blogRequest.files[i]);
+        if(i+1 == this.blogRequest.files.length){
+          this.blogCrudService.saveJugador(this.fd).subscribe(
+            (data) => {
+              this.router.navigateByUrl('/dashboard/blogs');
+              this.toastr.success('Se a creado satisfactoriamente', `El blog "${data.blog.title}"`);
+            },
 
-          (error) => {
-            console.log(error);
-            this.router.navigateByUrl('/dashboard/blogs')
-          }
-        );
+            (error) => {
+              this.router.navigateByUrl('/dashboard/blogs');
+              this.toastr.error(error, 'Tenemos un problema');
+            }
+          );
+        }
       }
+    }else{
+      this.blogCrudService.saveJugador(this.fd).subscribe(
+        (data) => {
+          this.router.navigateByUrl('/dashboard/blogs');
+          this.toastr.success(data.message, `El blog "${data.blog.title}"`);
+        },
+
+        (error) => {
+          console.log("error", error)
+          this.router.navigateByUrl('/dashboard/blogs');
+          this.toastr.error(error.error, 'Error');
+        }
+      );
     }
+
   }
 }

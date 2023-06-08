@@ -9,7 +9,8 @@ import { BlogLocal, LastBlogLocal, PopularBlogLocal } from '../../data/constants
   providedIn: 'root'
 })
 export class BlogService {
-  url = environment.server + 'blogs/';
+  url = 'api/blogs/';
+  urlAdd = 'api/blogsAddView/';
   blogLocal:any = BlogLocal;
   lastBlogLocal:any = LastBlogLocal;
   popularBlogLocal:any = PopularBlogLocal;
@@ -32,22 +33,27 @@ export class BlogService {
   }
 
   getBlog(id: string): Observable<any> {
-    return of((this.blogLocal).filter((t: { _id: string; }) => t._id == id)[0]);
-    // return this.http.get(this.url + id);
+    // return of((this.blogLocal).filter((t: { _id: string; }) => t._id == id)[0]);
+    return this.http.get(this.url + id);
   }
 
   getBlogs(): Observable<any> {
-    return of(this.blogLocal);
-    // return this.http.get(this.url);
+    // return of(this.blogLocal);
+    return this.http.get(this.url);
   }
 
-  getLastBlogs(): Observable<any> {
-    return of(this.lastBlogLocal);
-    // return this.http.get(this.url);
+  getBlogAddView(id: string): Observable<any> {
+    // return of((this.blogLocal).filter((t: { _id: string; }) => t._id == id)[0]);
+    return this.http.get(this.urlAdd + id);
   }
 
-  getPopularBlogs(): Observable<any> {
-    return of(this.popularBlogLocal);
-    // return this.http.get(this.url);
+  getLastBlogs(number: Number): Observable<any> {
+    // return of(this.lastBlogLocal);
+    return this.http.get(this.url + 'last/' + number);
+  }
+
+  getPopularBlogs(number: Number): Observable<any> {
+    // return of(this.popularBlogLocal);
+    return this.http.get(this.url + 'popular/' + number);
   }
 }
