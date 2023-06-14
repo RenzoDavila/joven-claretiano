@@ -63,7 +63,6 @@ export class BlogCrearEditarComponent {
         description7: [''],
         description8: [''],
         description9: [''],
-        required: [''],
       });
       this.formModal = this.fb.group({
         descriptionSelect: ['', Validators.required],
@@ -78,7 +77,6 @@ export class BlogCrearEditarComponent {
 
   ngOnInit() {
     this.initialize();
-    this.esEditar();
   }
 
   initialize(){
@@ -91,6 +89,7 @@ export class BlogCrearEditarComponent {
       (data) => {
         this.tags = data
       },
+
 
       (error) => {
         console.log(error);
@@ -133,23 +132,62 @@ export class BlogCrearEditarComponent {
       this.blogService.getBlog(this.id).subscribe(
         (data) => {
           console.log("data", data)
-
-          // this.form.get('titulo')?.setValue(0);
-
           this.form.setValue({
-            titulo: 'XDXDXD',
-            description: 'description1',
-            description1: '',
-            description2: '',
-            description3: '',
-            description4: '',
-            description5: '',
-            description6: '',
-            description7: '',
-            description8: '',
-            description9: '',
-            // fecha_inscripcion: Fecha.formatDate_yyyymmdd(dateTime.toISOString()),
+            titulo: data.title,
+            tagSelect: data.tag,
+            description: "",
+            description1: "",
+            description2: "",
+            description3: "",
+            description4: "",
+            description5: "",
+            description6: "",
+            description7: "",
+            description8: "",
+            description9: "",
           });
+
+          if(data.content[0]){
+            this.form.get("description")?.setValue(data.content[0].text);
+          };
+
+          if(data.content[1]){
+            this.form.get("description1")?.setValue(data.content[1].text);
+          };
+
+          if(data.content[2]){
+            this.form.get("description2")?.setValue(data.content[2].text);
+          };
+
+          if(data.content[3]){
+            this.form.get("description3")?.setValue(data.content[3].text);
+          };
+
+          if(data.content[4]){
+            this.form.get("description4")?.setValue(data.content[4].text);
+          };
+
+          if(data.content[5]){
+            this.form.get("description5")?.setValue(data.content[5].text);
+          };
+
+          if(data.content[6]){
+            this.form.get("description6")?.setValue(data.content[6].text);
+          };
+
+          if(data.content[7]){
+            this.form.get("description7")?.setValue(data.content[7].text);
+          };
+
+          if(data.content[8]){
+            this.form.get("description8")?.setValue(data.content[8].text);
+          };
+
+          if(data.content[9]){
+            this.form.get("description9")?.setValue(data.content[9].text);
+          };
+
+          this.descriptions = data.content.length - 1;
 
         },
 
@@ -207,6 +245,7 @@ export class BlogCrearEditarComponent {
     this.formModal.get('multimedia')?.setValue("")
     this.formModal.get('multimediaPosition')?.setValue("")
 
+    console.log("this.imgsArray", this.imgsArray)
   }
 
   openModal(){
@@ -299,6 +338,7 @@ export class BlogCrearEditarComponent {
       this.fd.append(`content[${index}][text]`, content.text);
       this.fd.append(`content[${index}][multimediaType]`, content.multimediaType);
       this.fd.append(`content[${index}][multimediaPosition]`, content.multimediaPosition);
+      this.fd.append(`content[${index}][multimediaPath]`, content.multimediaPath);
       if(content.file.descriptionSelect){
         this.fd.append(`content[${index}][file]`, `files${countContent}`);
         countContent = countContent + 1
@@ -324,32 +364,34 @@ export class BlogCrearEditarComponent {
       for (let i = 0; i < this.blogRequest.files.length; i++) {
         this.fd.append(`files${i}`, this.blogRequest.files[i]);
         if(i+1 == this.blogRequest.files.length){
-          this.blogCrudService.saveJugador(this.fd).subscribe(
-            (data) => {
-              this.router.navigateByUrl('/dashboard/blogs');
-              this.toastr.success('Se a creado satisfactoriamente', `El blog "${data.blog.title}"`);
-            },
+          console.log("this.fd", this.fd);
+          // this.blogCrudService.saveBlog(this.fd).subscribe(
+          //   (data) => {
+          //     this.router.navigateByUrl('/dashboard/blogs');
+          //     this.toastr.success('Se a creado satisfactoriamente', `El blog "${data.blog.title}"`);
+          //   },
 
-            (error) => {
-              this.router.navigateByUrl('/dashboard/blogs');
-              this.toastr.error(error, 'Tenemos un problema');
-            }
-          );
+          //   (error) => {
+          //     this.router.navigateByUrl('/dashboard/blogs');
+          //     this.toastr.error(error, 'Tenemos un problema');
+          //   }
+          // );
         }
       }
     }else{
-      this.blogCrudService.saveJugador(this.fd).subscribe(
-        (data) => {
-          this.router.navigateByUrl('/dashboard/blogs');
-          this.toastr.success(data.message, `El blog "${data.blog.title}"`);
-        },
+      console.log("this.fd", this.fd);
+      // this.blogCrudService.saveBlog(this.fd).subscribe(
+      //   (data) => {
+      //     this.router.navigateByUrl('/dashboard/blogs');
+      //     this.toastr.success(data.message, `El blog "${data.blog.title}"`);
+      //   },
 
-        (error) => {
-          console.log("error", error)
-          this.router.navigateByUrl('/dashboard/blogs');
-          this.toastr.error(error.error, 'Error');
-        }
-      );
+      //   (error) => {
+      //     console.log("error", error)
+      //     this.router.navigateByUrl('/dashboard/blogs');
+      //     this.toastr.error(error.error, 'Error');
+      //   }
+      // );
     }
 
   }
