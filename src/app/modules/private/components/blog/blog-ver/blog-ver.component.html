@@ -2,7 +2,8 @@
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2 title-dashboard">Blogs</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-      <button type="button" class="btn btn-outline-success"  [routerLink]="['/dashboard/crear-blog']">Crear Nuevo</button>
+      <button type="button" class="btn btn-outline-success d-none d-md-block" [routerLink]="['/dashboard/crear-blog']" style="margin-top: 10px">Crear Nuevo</button>
+      <button type="button" class="btn btn-outline-success btn-action d-md-none" [routerLink]="['/dashboard/crear-blog']" style="margin-top: 10px"><i class="bi bi-file-earmark-plus btn-action-icon"></i></button>
     </div>
   </div>
 
@@ -14,6 +15,7 @@
           <th scope="col">Fecha</th>
           <th scope="col">Hora</th>
           <th scope="col">Tag</th>
+          <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +24,14 @@
           <td>{{blog.fechaFormat}}</td>
           <td>{{blog.horaFormat}}</td>
           <td>{{blog.tag.title}}</td>
+          <td class="d-flex justify-content-center">
+            <a [routerLink]="['/dashboard/editar-blog', blog._id]">
+              <i class="bi bi-pencil-square"></i>
+            </a> <div style="margin-left: 1rem">
+            </div>
+            <a (click)="deleteData(blog._id)">
+              <i class="bi bi-trash-fill"></i>
+            </a>
         </tr>
       </tbody>
     </table>

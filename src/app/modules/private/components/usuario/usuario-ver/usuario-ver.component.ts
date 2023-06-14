@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BlogService } from 'src/app/modules/public/services/blog/blog.service';
+import { UserService } from 'src/app/modules/public/services/user/user.service';
 import { GeneralService } from '../../../services/general/general.service';
 import * as moment from 'moment';
 
@@ -9,53 +9,24 @@ import * as moment from 'moment';
   styleUrls: ['./usuario-ver.component.sass']
 })
 export class UsuarioVerComponent {
-  blogs:any;
+  users:any;
   tags:any;
 
   constructor(
-    private _blogService: BlogService,
+    private _userService: UserService,
     private generalService: GeneralService,
     ){
   }
 
   ngOnInit(): void {
     moment.locale('es')
-    this.getTags();
+    this.getUsers();
   }
 
-  getTags(){
-    this.generalService.getTags().subscribe(
+  getUsers(){
+    this._userService.getUsers().subscribe(
       (data) => {
-        this.tags = data
-        this.getBlogs();
-      },
-
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  getBlogs(){
-    this._blogService.getBlogs().subscribe(
-      (data) => {
-        let newData = data
-        newData.map((item:any, index: any) => {
-          item.fechaFormat = moment(new Date(item.fecha)).format('YYYY-MM-DD');
-          item.horaFormat = moment(new Date(item.fecha)).format('hh:mm A');
-
-          const tag = this.tags.filter((t: { _id: string; }) => t._id == item.tag);
-
-          if (tag.length > 0) {
-            item.tag = {color: tag[0].color, description: tag[0].description, title: tag[0].title}
-          };
-
-          if(newData.length == index+1){
-            this.blogs = newData
-            console.log("this.blogs", this.blogs)
-          };
-
-        });
+        this.users = data;
       },
       (error) => {
         console.log(error);

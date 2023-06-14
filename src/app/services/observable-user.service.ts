@@ -7,25 +7,21 @@ import { User } from '../models/observables/user.model';
 //   nombre: "",
 //   password: "",
 //   estado: "",
-//   permisos: {
-//     ver: false,
-//     crear: false,
-//     editar: false,
-//     eliminar: false
-//   }
+//   ver: false,
+//   crear: false,
+//   editar: false,
+//   eliminar: false
 // }
 
 const user: User = {
-  codigo: "admin",
-  nombre: "nombre admin",
+  codigo: "rjdavila",
+  nombre: "Renzo Jhair Davila Acosta",
   password: "123",
   estado: "super admin",
-  permisos: {
-    ver: true,
-    crear: true,
-    editar: true,
-    eliminar: true
-  }
+  ver: false,
+  crear: false,
+  editar: false,
+  eliminar: false
 }
 
 @Injectable({

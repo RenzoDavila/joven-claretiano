@@ -5,5 +5,9 @@ export class User {
   nombre!:string;
   password!:string;
   estado!:string;
-  permisos!:Permisos;
+  ver!:boolean;
+  crear!:boolean;
+  editar!:boolean;
+  eliminar!:boolean;
+  // permisos!:Permisos;
 }

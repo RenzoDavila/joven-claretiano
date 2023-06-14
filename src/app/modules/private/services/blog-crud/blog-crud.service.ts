@@ -16,15 +16,15 @@ export class BlogCrudService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  deleteJugador(id: string): Observable<any> {
+  deleteBlog(id: string): Observable<any> {
     return this.http.delete(this.url + id);
   }
 
-  saveJugador(fd:any): Observable<any> {
+  saveBlog(fd:any): Observable<any> {
     return this.http.post(this.url, fd);
   }
 
-  editJugador(id: string, jugador: any): Observable<any> {
+  editBlog(id: string, jugador: any): Observable<any> {
     return this.http.put(this.url + id, jugador);
   }
 }

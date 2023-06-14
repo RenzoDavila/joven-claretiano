@@ -15,12 +15,10 @@ export class HeaderComponent {
     nombre: "",
     password: "",
     estado: "",
-    permisos: {
-      ver: false,
-      crear: false,
-      editar: false,
-      eliminar: false
-    }
+    ver: false,
+    crear: false,
+    editar: false,
+    eliminar: false
   };
   userData!: User;
 
@@ -50,12 +48,10 @@ export class HeaderComponent {
       nombre: "nombre admin",
       password: "123",
       estado: "super admin",
-      permisos: {
-        ver: true,
-        crear: true,
-        editar: true,
-        eliminar: true
-      }
+      ver: true,
+      crear: true,
+      editar: true,
+      eliminar: true
     }
     this.observableUserServices.setUser(user)
     this.router.navigate(['/']);

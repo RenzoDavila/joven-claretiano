@@ -9,6 +9,7 @@ import { BlogVerComponent } from './modules/private/components/blog/blog-ver/blo
 import { LoginComponent } from './components/login/login.component';
 import { UsuarioVerComponent } from './modules/private/components/usuario/usuario-ver/usuario-ver.component';
 import { BlogCrearEditarComponent } from './modules/private/components/blog/blog-crear-editar/blog-crear-editar.component';
+import { UsuarioCrearEditarComponent } from './modules/private/components/usuario/usuario-crear-editar/usuario-crear-editar.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,8 @@ const routes: Routes = [
       { path: 'crear-blog', component: BlogCrearEditarComponent},
       { path: 'editar-blog/:id', component: BlogCrearEditarComponent},
       { path: 'users', component: UsuarioVerComponent},
+      { path: 'crear-user', component: UsuarioCrearEditarComponent},
+      { path: 'editar-user/:id', component: UsuarioCrearEditarComponent},
       { path: '**', redirectTo: 'blogs', pathMatch: 'full' },
     ]
   },

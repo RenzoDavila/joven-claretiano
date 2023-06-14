@@ -1,1 +1,94 @@
-<p>usuario-crear-editar works!</p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2 title-dashboard">Crear Usuario</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <button type="button" class="btn btn-outline-danger" [routerLink]="['/dashboard/blogs']" style="margin-top: 10px">Cancelar
+    </button>
+  </div>
+</div>
+
+<div class="col-lg-6 mx-auto">
+  <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <span class="display-6"> Nuevo </span>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form">
+
+            <div class="form-group">
+                <input formControlName="nombres" id="nombres" type="text" class="form-control" placeholder="nombres" [ngClass]="{'required' : (form.get('nombres')?.hasError('required') && form.get('nombres')?.touched)}" (keyup)="cambiarCodigo()">
+                <div class="text-danger" *ngIf="form.get('nombres')?.hasError('required') && form.get('nombres')?.touched">
+                  <span>Este campo es <strong>obligatorio</strong></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input formControlName="apellidos" id="apellidos" type="text" class="form-control" placeholder="apellidos" [ngClass]="{'required' : (form.get('apellidos')?.hasError('required') && form.get('apellidos')?.touched)}" (keyup)="cambiarCodigo()">
+                <div class="text-danger" *ngIf="form.get('apellidos')?.hasError('required') && form.get('apellidos')?.touched">
+                  <span>Este campo es <strong>obligatorio</strong></span>
+                </div>
+            </div>
+
+            <div class="form-group d-flex justify-content-between">
+              <span class="form-label-select">Tipo:</span>
+              <select class="form-select form-select-lg mb-3" formControlName="estado" id="estado" (change)="changeEstado(form.get('estado')?.value)">
+                <option value="N">Normal</option>
+                <option value="A">Admin</option>
+                <option value="SA">Super Admin</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+                <input type="email" formControlName="email" id="email" class="form-control" placeholder="email" [ngClass]="{'required' : ((form.get('email')?.hasError('required') && form.get('email')?.touched)) || form.get('email')?.hasError('email')}">
+                <div class="text-danger" *ngIf="form.get('email')?.hasError('email')">
+                  <span>Este es un correo <strong>invalido</strong></span>
+                </div>
+                <div class="text-danger" *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+                  <span>Este campo es <strong>obligatorio</strong></span>
+                </div>
+            </div>
+
+            <div class="form-group d-flex justify-content-between">
+              <input formControlName="pass" id="pass" type="password" class="form-control form-description" placeholder="contraseña">
+              <button *ngIf="eye" (click)="ocultarPass()" type="button" class="btn btn-eye"><i class="bi bi-eye-fill"></i></button>
+              <button *ngIf="!eye" (click)="verPass()" type="button" class="btn btn-eye"><i class="bi bi-eye-slash-fill"></i></button>
+            </div>
+
+            <div class="form-group">
+                <input formControlName="codigo" id="codigo" type="text" class="form-control" placeholder="usuario" [readOnly]="true">
+            </div>
+
+            <div class="form-label-select" [hidden]="form.get('estado')?.value == 'N'">
+                Permisos:
+            </div>
+
+            <div class="form-group d-flex justify-content-between">
+              <div [hidden]="form.get('estado')?.value == 'N'">
+                <input formControlName="ver" class="form-check-input" type="checkbox" id="ver">
+                <label class="form-check-label" for="ver">Ver</label>
+              </div>
+              <div class="group-align-checks" [hidden]="form.get('estado')?.value == 'N'">
+                <input formControlName="crear" class="form-check-input" type="checkbox" id="crear">
+                <label class="form-check-label" for="crear">Crear</label>
+              </div>
+            </div>
+
+            <div class="form-group d-flex justify-content-between">
+              <div [hidden]="form.get('estado')?.value == 'N'">
+                <input formControlName="editar" class="form-check-input" type="checkbox" id="editar">
+                <label class="form-check-label" for="editar">Editar</label>
+              </div>
+              <div class="group-align-checks" [hidden]="form.get('estado')?.value == 'N'">
+                <input formControlName="eliminar" class="form-check-input" type="checkbox" id="eliminar">
+                <label class="form-check-label" for="eliminar">Eliminar</label>
+              </div>
+            </div>
+
+        </form>
+      </div>
+      <div class="card-footer d-flex justify-content-center">
+        <button class="btn btn-outline-success btn-block" [disabled]="form.invalid || disabledOnSubmit" [ngClass]="{'disabled-btn': form.invalid || disabledOnSubmit}" (click)="onSubmit()">
+          Crear
+        </button>
+      </div>
+  </div>
+</div>

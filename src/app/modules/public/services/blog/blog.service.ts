@@ -33,27 +33,22 @@ export class BlogService {
   }
 
   getBlog(id: string): Observable<any> {
-    // return of((this.blogLocal).filter((t: { _id: string; }) => t._id == id)[0]);
     return this.http.get(this.url + id);
   }
 
   getBlogs(): Observable<any> {
-    // return of(this.blogLocal);
     return this.http.get(this.url);
   }
 
   getBlogAddView(id: string): Observable<any> {
-    // return of((this.blogLocal).filter((t: { _id: string; }) => t._id == id)[0]);
     return this.http.get(this.urlAdd + id);
   }
 
   getLastBlogs(number: Number): Observable<any> {
-    // return of(this.lastBlogLocal);
     return this.http.get(this.url + 'last/' + number);
   }
 
   getPopularBlogs(number: Number): Observable<any> {
-    // return of(this.popularBlogLocal);
     return this.http.get(this.url + 'popular/' + number);
   }
 }

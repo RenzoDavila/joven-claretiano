@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2 title-dashboard">Crear Blog</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
-    <button type="button" class="btn btn-outline-danger" [routerLink]="['/dashboard/blogs']">Cancelar
+    <button type="button" class="btn btn-outline-danger" [routerLink]="['/dashboard/blogs']" style="margin-top: 10px">Cancelar
     </button>
   </div>
 </div>
@@ -24,7 +24,7 @@
             <div class="form-group d-flex justify-content-between">
               <span class="form-label-select">Tipo:</span>
               <select class="form-select form-select-lg mb-3" formControlName="tagSelect" id="descriptionSelect" value="645fd9bb7613ca2100243b13">
-                <option *ngFor="let tag of tags; let i = index" [value]="tag._id">{{tag.description | titlecase}}</option>
+                <option *ngFor="let tag of tags; let i = index" [value]="tag._id">{{tag.title | titlecase}}</option>
               </select>
             </div>
 
@@ -48,7 +48,10 @@
         </form>
       </div>
       <div class="card-footer d-flex justify-content-center">
-        <button class="btn btn-outline-success btn-block" [disabled]="form.invalid || disabledOnSubmit" [ngClass]="{'disabled-btn': form.invalid || disabledOnSubmit}" (click)="onSubmit()">
+        <button *ngIf="id != null" class="btn btn-outline-info btn-block" [disabled]="form.invalid || disabledOnSubmit" [ngClass]="{'disabled-btn': form.invalid || disabledOnSubmit}" (click)="onSubmit()">
+          Editar
+        </button>
+        <button *ngIf="id == null" class="btn btn-outline-success btn-block" [disabled]="form.invalid || disabledOnSubmit" [ngClass]="{'disabled-btn': form.invalid || disabledOnSubmit}" (click)="onSubmit()">
           Crear
         </button>
       </div>
