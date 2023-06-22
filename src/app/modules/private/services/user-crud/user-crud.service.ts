@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserCrudService {
-  url = 'api/users/';
+  url = environment.server + 'api/users/';
 
   constructor(private http: HttpClient, private router: Router) { }
 

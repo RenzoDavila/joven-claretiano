@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { BlogLocal, LastBlogLocal, PopularBlogLocal } from '../../data/constants/BlogLocal.const';
@@ -9,7 +10,7 @@ import { IBlogRequest } from '../../data/requests/blog-request';
   providedIn: 'root'
 })
 export class BlogCrudService {
-  url = 'api/blogs/';
+  url = environment.server + 'api/blogs/';
   blogLocal:any = BlogLocal;
   lastBlogLocal:any = LastBlogLocal;
   popularBlogLocal:any = PopularBlogLocal;

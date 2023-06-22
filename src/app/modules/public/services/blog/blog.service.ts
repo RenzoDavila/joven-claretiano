@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { BlogLocal, LastBlogLocal, PopularBlogLocal } from '../../data/constants/BlogLocal.const';
 
@@ -9,7 +9,7 @@ import { BlogLocal, LastBlogLocal, PopularBlogLocal } from '../../data/constants
   providedIn: 'root'
 })
 export class BlogService {
-  url = 'api/blogs/';
+  url = environment.server + 'api/blogs/';
   urlAdd = 'blogsAddView/';
   blogLocal:any = BlogLocal;
   lastBlogLocal:any = LastBlogLocal;
