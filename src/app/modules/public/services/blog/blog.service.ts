@@ -10,7 +10,7 @@ import { BlogLocal, LastBlogLocal, PopularBlogLocal } from '../../data/constants
 })
 export class BlogService {
   url = 'api/blogs/';
-  urlAdd = 'api/blogsAddView/';
+  urlAdd = 'blogsAddView/';
   blogLocal:any = BlogLocal;
   lastBlogLocal:any = LastBlogLocal;
   popularBlogLocal:any = PopularBlogLocal;
@@ -36,12 +36,12 @@ export class BlogService {
     return this.http.get(this.url + id);
   }
 
-  getBlogs(): Observable<any> {
-    return this.http.get(this.url);
+  getBlogs(number: number, page: number, sort: string): Observable<any> {
+    return this.http.get(this.url + number  + '/' + page  + '/' + sort);
   }
 
   getBlogAddView(id: string): Observable<any> {
-    return this.http.get(this.urlAdd + id);
+    return this.http.get(this.url + this.urlAdd + id);
   }
 
   getLastBlogs(number: Number): Observable<any> {

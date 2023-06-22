@@ -7,22 +7,30 @@
     </div>
   </div>
 
+  <app-pagination [registers]="registers" [pagination]="pagination" (pageChange)="pageChange($event)"></app-pagination>
+
   <div class="table-responsive">
-    <table class="table table-striped table-sm">
+    <table class="table table-sm">
       <thead>
-        <tr>
+        <tr class="col-head">
           <th scope="col">Titulo</th>
-          <th scope="col">Fecha</th>
-          <th scope="col">Hora</th>
+          <th scope="col">Fecha Creado</th>
+          <th scope="col" style="min-width: 80px;">Hora Creado</th>
+          <th scope="col">Fecha Editado</th>
+          <th scope="col" style="min-width: 80px;">Hora Editado</th>
           <th scope="col">Tag</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="dataExists">
         <tr *ngFor="let blog of blogs">
           <td>{{blog.title}}</td>
-          <td>{{blog.fechaFormat}}</td>
-          <td>{{blog.horaFormat}}</td>
+          <td>{{blog.fechaCreatedFormat}}</td>
+          <td>{{blog.horaCreatedFormat}}</td>
+          <td *ngIf="blog.state == 'C'">-</td>
+          <td *ngIf="blog.state == 'C'">-</td>
+          <td *ngIf="blog.state == 'E'">{{blog.fechaEditedFormat}}</td>
+          <td *ngIf="blog.state == 'E'">{{blog.horaEditedFormat}}</td>
           <td>{{blog.tag.title}}</td>
           <td class="d-flex justify-content-center">
             <a [routerLink]="['/dashboard/editar-blog', blog._id]">
@@ -32,8 +40,11 @@
             <a (click)="deleteData(blog._id)">
               <i class="bi bi-trash-fill"></i>
             </a>
+          </td>
         </tr>
       </tbody>
     </table>
+    <p class="d-flex justify-content-center" *ngIf="!dataExists">No existen registros actualmente</p>
   </div>
+
 </div>

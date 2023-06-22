@@ -9,6 +9,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { TagCrearEditarComponent } from './components/tag/tag-crear-editar/tag-crear-editar.component';
+import { TagVerComponent } from './components/tag/tag-ver/tag-ver.component';
 
 
 
@@ -20,7 +23,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UsuarioCrearEditarComponent,
     HeaderComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    PaginationComponent,
+    TagCrearEditarComponent,
+    TagVerComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +35,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    PaginationComponent
   ]
 })
 export class PrivateModule { }

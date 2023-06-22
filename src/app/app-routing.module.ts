@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { UsuarioVerComponent } from './modules/private/components/usuario/usuario-ver/usuario-ver.component';
 import { BlogCrearEditarComponent } from './modules/private/components/blog/blog-crear-editar/blog-crear-editar.component';
 import { UsuarioCrearEditarComponent } from './modules/private/components/usuario/usuario-crear-editar/usuario-crear-editar.component';
+import { TagVerComponent } from './modules/private/components/tag/tag-ver/tag-ver.component';
+import { TagCrearEditarComponent } from './modules/private/components/tag/tag-crear-editar/tag-crear-editar.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,6 +34,9 @@ const routes: Routes = [
       { path: 'users', component: UsuarioVerComponent},
       { path: 'crear-user', component: UsuarioCrearEditarComponent},
       { path: 'editar-user/:id', component: UsuarioCrearEditarComponent},
+      { path: 'tags', component: TagVerComponent},
+      { path: 'crear-tag', component: TagCrearEditarComponent},
+      { path: 'editar-tag/:id', component: TagCrearEditarComponent},
       { path: '**', redirectTo: 'blogs', pathMatch: 'full' },
     ]
   },

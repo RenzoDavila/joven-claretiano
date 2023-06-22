@@ -28,6 +28,6 @@ export class GeneralService {
   }
 
   getTags(): Observable<any> {
-    return this.http.get(this.urlTag);
+    return this.http.get(this.urlTag + 'all');
   }
 }

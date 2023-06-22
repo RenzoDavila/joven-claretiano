@@ -18,7 +18,7 @@ export class BlogPostComponent implements OnInit {
   popularBlogs:any;
   urlServer = environment.server;
 
-  constructor(private aRoute: ActivatedRoute, private _blogService: BlogService, private generalService: GeneralService){
+  constructor(private aRoute: ActivatedRoute, private blogService: BlogService, private generalService: GeneralService){
     this.id = this.aRoute.snapshot.paramMap.get('id');
   }
 
@@ -43,13 +43,13 @@ export class BlogPostComponent implements OnInit {
   }
 
   getBlogAddView(id: string){
-    this._blogService.getBlogAddView(id).subscribe(
+    this.blogService.getBlogAddView(id).subscribe(
       (data) => {
+        console.log("getBlogAddView", data)
         this.blog = data
         this.blog.fechaFormat = moment(new Date(this.blog.fecha)).format('MMM Do [Del] YYYY [a las] hh:mm:ss');
         const tag = this.tags.filter((t: { _id: string; }) => t._id == this.blog.tag);
         this.blog.tag = tag;
-        console.log("this.blog", this.blog);
       },
       (error) => {
         console.log(error);
@@ -58,8 +58,9 @@ export class BlogPostComponent implements OnInit {
   }
 
   getLastBlogs() {
-    this._blogService.getLastBlogs(3).subscribe(
+    this.blogService.getLastBlogs(3).subscribe(
       (data) => {
+        console.log("getLastBlogs", data)
         let newData = data;
         newData.map((item:any, index: any) => {
           item.fechaFormat = moment(new Date(item.fecha)).format('YYYY-MM-DD hh:mm A');
@@ -83,8 +84,9 @@ export class BlogPostComponent implements OnInit {
   };
 
   getPopularBlogs() {
-    this._blogService.getPopularBlogs(3).subscribe(
+    this.blogService.getPopularBlogs(3).subscribe(
       (data) => {
+        console.log("getPopularBlogs", data)
         let newData = data;
         newData.map((item:any, index: any) => {
           item.fechaFormat = moment(new Date(item.fecha)).format('YYYY-MM-DD hh:mm A');

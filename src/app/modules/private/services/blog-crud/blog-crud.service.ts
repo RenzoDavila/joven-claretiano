@@ -16,7 +16,7 @@ export class BlogCrudService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  deleteBlog(id: string): Observable<any> {
+  deleteBlog(id:string): Observable<any> {
     return this.http.delete(this.url + id);
   }
 
@@ -24,7 +24,7 @@ export class BlogCrudService {
     return this.http.post(this.url, fd);
   }
 
-  editBlog(id: string, jugador: any): Observable<any> {
-    return this.http.put(this.url + id, jugador);
+  editBlog(id:string, fd:any): Observable<any> {
+    return this.http.put(this.url + id, fd);
   }
 }

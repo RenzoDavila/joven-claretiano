@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2 title-dashboard">Crear Tag</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <button type="button" class="btn btn-outline-danger" [routerLink]="['/dashboard/users']" style="margin-top: 10px">Cancelar
+    </button>
+  </div>
+</div>
+
+<div class="col-lg-6 mx-auto">
+  <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <span class="display-6"> Nuevo </span>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form">
+
+            <div class="form-group">
+                <input formControlName="title" id="title" type="text" class="form-control" placeholder="title" [ngClass]="{'required' : (form.get('title')?.hasError('required') && form.get('title')?.touched)}">
+                <div class="text-danger" *ngIf="form.get('title')?.hasError('required') && form.get('title')?.touched">
+                  <span>Este campo es <strong>obligatorio</strong></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input formControlName="description" id="description" type="text" class="form-control" placeholder="description" [ngClass]="{'required' : (form.get('description')?.hasError('required') && form.get('description')?.touched)}">
+                <div class="text-danger" *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched">
+                  <span>Este campo es <strong>obligatorio</strong></span>
+                </div>
+            </div>
+
+            <div class="form-group d-flex justify-content-start">
+              <span class="form-label-select">Color:</span>
+              <input type="color" id="color" value="#ff0000" style="width:120px;">
+            </div>
+
+        </form>
+      </div>
+      <div class="card-footer d-flex justify-content-center">
+        <button *ngIf="id != null" class="btn btn-outline-info btn-block" [disabled]="form.invalid || disabledOnSubmit" [ngClass]="{'disabled-btn': form.invalid || disabledOnSubmit}" (click)="onSubmit()">
+          Editar
+        </button>
+        <button *ngIf="id == null" class="btn btn-outline-success btn-block" [disabled]="form.invalid || disabledOnSubmit" [ngClass]="{'disabled-btn': form.invalid || disabledOnSubmit}" (click)="onSubmit()">
+          Crear
+        </button>
+      </div>
+  </div>
+</div>

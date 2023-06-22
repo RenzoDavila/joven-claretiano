@@ -1,0 +1,61 @@
+
+<div *ngIf="pagination > 0" class="d-flex justify-content-between">
+
+  <p class="page-enum">Registros: {{registers}}</p>
+
+  <nav aria-label="Page navigation example" class="d-none d-md-block">
+    <ul class="pagination">
+
+      <li class="page-item">
+        <a *ngIf="page > 1" class="page-link" (click)="changePage(1)" aria-label="Primero">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+        <a *ngIf="page == 1" class="page-link" aria-label="Primero">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <li class="page-item">
+        <a *ngIf="!(page - 2 <= 0)" class="page-link" (click)="changePage(page - 2)" (aria-label)="'Pagina' + (page - 2)">
+          <span aria-hidden="true">{{page - 2}}</span>
+        </a>
+      </li>
+
+      <li *ngIf="!(page - 1 <= 0)" class="page-item">
+        <a class="page-link" (click)="changePage(page - 1)" (aria-label)="'Pagina' + (page - 1)">
+          <span aria-hidden="true">{{page - 1}}</span>
+        </a>
+      </li>
+
+      <li class="page-item active">
+        <a class="page-link">{{page}}</a>
+      </li>
+
+      <li *ngIf="!(page + 1 > newPagination)" class="page-item">
+        <a class="page-link" (click)="changePage(page + 1)" aria-label="Siguiente">
+          <span aria-hidden="true">{{page + 1}}</span>
+        </a>
+      </li>
+      <li *ngIf="!(page + 2 > newPagination)" class="page-item">
+        <a class="page-link" (click)="changePage(page + 2)" (aria-label)="'Pagina' + (page + 1)">
+          <span aria-hidden="true">{{page + 2}}</span>
+        </a>
+      </li>
+
+      <li class="page-item">
+        <a *ngIf="newPagination > page" class="page-link" (click)="changePage(newPagination)" (aria-label)="'Pagina' + (page + 2)">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+        <a *ngIf="newPagination == page" class="page-link" (aria-label)="'Pagina' + (page + 2)">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+
+  <select class="form-select" id="pagSelect" [value]="page" (change)="changePageSelect()">
+    <option *ngFor="let dummy of ' '.repeat(newPagination).split(''), let i = index" [value]="i+1">Pag. {{i+1}}</option>
+  </select>
+
+</div>

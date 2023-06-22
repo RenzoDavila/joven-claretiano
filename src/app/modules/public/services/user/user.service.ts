@@ -30,7 +30,7 @@ export class UserService {
     return this.http.get(this.url + id);
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(this.url);
+  getUsers(number: number, page: number, sort: string): Observable<any> {
+    return this.http.get(this.url + number  + '/' + page  + '/' + sort);
   }
 }

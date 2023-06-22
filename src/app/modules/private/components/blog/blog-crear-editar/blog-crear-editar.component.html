@@ -29,16 +29,20 @@
             </div>
 
             <div class="form-group d-flex justify-content-between">
-                <button *ngIf="imageExist('description')"  type="button" class="btn btn-outline-danger btn-minus" (click)="dropImg('description')"><i class="bi bi-x-lg btn-minus-icon"></i></button>
-                <img *ngIf="imageExist('description')" [src]="getImage('description')" class="img-preview" alt="No image">
-                <textarea formControlName="description" id="description" rows="3" class="form-control" placeholder="Descripción"></textarea>
+              <button *ngIf="imageExist('description')"  type="button" class="btn btn-outline-danger btn-minus" (click)="dropImg('description')"><i class="bi bi-x-lg btn-minus-icon"></i></button>
+              <button *ngIf="form.controls['descPath'].value"  type="button" class="btn btn-outline-danger btn-minus" (click)="dropImgPath('')"><i class="bi bi-x-lg btn-minus-icon"></i></button>
+              <img *ngIf="imageExist('description')" [src]="getImage('description', 'descPath')" class="img-preview" alt="No image">
+              <img *ngIf="form.controls['descPath'].value" alt="{{form.controls['descPath'].value}}" [src]="urlServer + form.controls['descPath'].value" class="img-preview">
+              <textarea formControlName="description" id="description" rows="3" class="form-control" placeholder="Descripción"></textarea>
             </div>
 
             <div *ngFor="let item of [].constructor(descriptions); let i = index" class="form-group d-flex justify-content-between">
-                <button *ngIf="imageExist('description'+(i+1))"  type="button" class="btn btn-outline-danger btn-minus" (click)="dropImg('description'+(i+1))"><i class="bi bi-x-lg btn-minus-icon"></i></button>
-                <img *ngIf="imageExist('description'+(i+1))" [src]="getImage('description'+(i+1))" class="img-preview" alt="No image">
-                <textarea [formControlName]="'description'+(i+1)"  [id]="'description'+(i+1)" rows="3" class="form-control" [ngClass]="{'form-description': descriptions == i+1}" [placeholder]="'Descripción +'+(i+1)"></textarea>
-                <button *ngIf="descriptions == i+1" type="button" class="btn btn-outline-danger btn-trash" (click)="onDelete('description'+(i+1))"><i class="bi bi-trash3-fill"></i></button>
+              <button *ngIf="imageExist('description'+(i+1))" type="button" class="btn btn-outline-danger btn-minus" (click)="dropImg('description'+(i+1))"><i class="bi bi-x-lg btn-minus-icon"></i></button>
+              <button *ngIf="form.controls['descPath'+(i+1)].value"  type="button" class="btn btn-outline-danger btn-minus" (click)="dropImgPath(''+(i+1))"><i class="bi bi-x-lg btn-minus-icon"></i></button>
+              <img *ngIf="imageExist('description'+(i+1))" [src]="getImage('description'+(i+1), 'descPath'+(i+1))" class="img-preview" alt="No image">
+              <img *ngIf="form.controls['descPath'+(i+1)].value" [src]="urlServer + form.controls['descPath'+(i+1)].value" class="img-preview" alt="{{form.controls['descPath'+(i+1)].value}}">
+              <textarea [formControlName]="'description'+(i+1)"  [id]="'description'+(i+1)" rows="3" class="form-control" [ngClass]="{'form-description': descriptions == i+1}" [placeholder]="'Descripción +'+(i+1)"></textarea>
+              <button *ngIf="descriptions == i+1" type="button" class="btn btn-outline-danger btn-trash" (click)="onDelete('description'+(i+1), 'descPath'+(i+1))"><i class="bi bi-trash3-fill"></i></button>
             </div>
 
             <div class="form-group d-flex justify-content-start">

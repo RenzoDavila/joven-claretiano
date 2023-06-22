@@ -36,7 +36,6 @@ export class HeaderComponent {
   }
 
   closeSesion(){
-    console.log("includes", this.router.url.includes('/dashboard'))
     this.observableUserServices.setUser(this.initialUserData)
     this.router.navigate(['/']);
   }

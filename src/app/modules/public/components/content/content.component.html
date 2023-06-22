@@ -2,7 +2,7 @@
 
 <div *ngIf="router.url.includes('/dashboard')" class="container-fluid" style="margin-top: 1rem;">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 p-md-0 d-md-block bg-light sidebar collapse">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 p-md-0 d-md-block bg-light sidebar collapse p-0">
       <div class="position-sticky pt-md-2 pt-3">
         <ul class="nav flex-column">
           <li class="nav-item" [ngClass]="{'active' : router.url.includes('blog')}" [routerLink]="['/dashboard/blogs']">
@@ -17,8 +17,17 @@
               Usuarios
             </a>
           </li>
+          <li class="nav-item" [ngClass]="{'active' : router.url.includes('tag')}" [routerLink]="['/dashboard/tags']">
+            <a class="nav-link">
+              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+              Tags
+            </a>
+          </li>
           <a *ngIf="collapse" (click)="changeCollapse(false)" class="d-md-none btn-collapse-up" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <svg viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>
+            <svg width="30" height="30" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+              <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+            </svg>
           </a>
         </ul>
       </div>
@@ -26,7 +35,10 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 principal">
       <div *ngIf="!collapse" class="w-100 d-md-none div-collapse-down"></div>
       <a *ngIf="!collapse" (click)="changeCollapse(true)" class="d-md-none btn-collapse-down" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <svg viewBox="0 0 24 24" width="30" height="30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>
+        <svg width="30" height="30" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+          <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
       </a>
       <router-outlet></router-outlet>
     </main>

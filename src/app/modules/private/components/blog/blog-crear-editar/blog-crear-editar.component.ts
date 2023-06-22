@@ -7,6 +7,8 @@ import { GeneralService } from '../../../services/general/general.service';
 import { IBlogContentRequest } from '../../../data/requests/blog-content-request copy';
 import { BlogCrudService } from '../../../services/blog-crud/blog-crud.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-blog-crear-editar',
@@ -40,7 +42,8 @@ export class BlogCrearEditarComponent {
     fecha: new Date(),
   };
   tags!:any [];
-  disabledOnSubmit: boolean = false
+  disabledOnSubmit: boolean = false;
+  urlServer = environment.server;
 
   constructor(
     private fb: FormBuilder,
@@ -54,15 +57,46 @@ export class BlogCrearEditarComponent {
         titulo: ['', Validators.required],
         tagSelect: ['645fd9bb7613ca2100243b13', Validators.required],
         description: ['', Validators.required],
+        descPath: [''],
+        descPathPosition: [''],
+        descPathType: ['N'],
         description1: [''],
+        descPath1: [''],
+        descPathPosition1: [''],
+        descPathType1: ['N'],
         description2: [''],
+        descPath2: [''],
+        descPathPosition2: [''],
+        descPathType2: ['N'],
         description3: [''],
+        descPath3: [''],
+        descPathPosition3: [''],
+        descPathType3: ['N'],
         description4: [''],
+        descPath4: [''],
+        descPathPosition4: [''],
+        descPathType4: ['N'],
         description5: [''],
+        descPath5: [''],
+        descPathPosition5: [''],
+        descPathType5: ['N'],
         description6: [''],
+        descPath6: [''],
+        descPathPosition6: [''],
+        descPathType6: ['N'],
         description7: [''],
+        descPath7: [''],
+        descPathPosition7: [''],
+        descPathType7: ['N'],
         description8: [''],
+        descPath8: [''],
+        descPathPosition8: [''],
+        descPathType8: ['N'],
         description9: [''],
+        descPath9: [''],
+        descPathPosition9: [''],
+        descPathType9: ['N'],
+        dateCreated: [''],
       });
       this.formModal = this.fb.group({
         descriptionSelect: ['', Validators.required],
@@ -87,6 +121,7 @@ export class BlogCrearEditarComponent {
   getTags(){
     this.generalService.getTags().subscribe(
       (data) => {
+        console.log("data", data)
         this.tags = data
       },
 
@@ -104,11 +139,12 @@ export class BlogCrearEditarComponent {
     }, 10);
   }
 
-  onDelete(desc: string){
+  onDelete(desc: string, descPath: string){
     this.descriptions = this.descriptions - 1
     this.imgsArray = this.imgsArray.filter((t: { descriptionSelect: string; }) => t.descriptionSelect != desc);
     this.form.get(desc)?.clearValidators();
-    this.form.get(desc)?.setValue("")
+    this.form.get(desc)?.setValue('');
+    this.form.get(descPath)?.setValue('');
   }
 
   onAdd(){
@@ -131,7 +167,6 @@ export class BlogCrearEditarComponent {
     if (this.id !== null) {
       this.blogService.getBlog(this.id).subscribe(
         (data) => {
-          console.log("data", data)
           this.form.setValue({
             titulo: data.title,
             tagSelect: data.tag,
@@ -145,48 +180,130 @@ export class BlogCrearEditarComponent {
             description7: "",
             description8: "",
             description9: "",
+            descPath: "",
+            descPath1: "",
+            descPath2: "",
+            descPath3: "",
+            descPath4: "",
+            descPath5: "",
+            descPath6: "",
+            descPath7: "",
+            descPath8: "",
+            descPath9: "",
+            descPathPosition: "",
+            descPathPosition1: "",
+            descPathPosition2: "",
+            descPathPosition3: "",
+            descPathPosition4: "",
+            descPathPosition5: "",
+            descPathPosition6: "",
+            descPathPosition7: "",
+            descPathPosition8: "",
+            descPathPosition9: "",
+            descPathType: "N",
+            descPathType1: "N",
+            descPathType2: "N",
+            descPathType3: "N",
+            descPathType4: "N",
+            descPathType5: "N",
+            descPathType6: "N",
+            descPathType7: "N",
+            descPathType8: "N",
+            descPathType9: "N",
+            dateCreated: [''],
           });
 
           if(data.content[0]){
             this.form.get("description")?.setValue(data.content[0].text);
+            if(data.content[0].imagePath) {
+              this.form.get("descPath")?.setValue(data.content[0].imagePath);
+              this.form.get("descPathPosition")?.setValue(data.content[0].multimediaPosition);
+              this.form.get("descPathType")?.setValue(data.content[0].multimediaType);
+            }
           };
 
           if(data.content[1]){
             this.form.get("description1")?.setValue(data.content[1].text);
+            if(data.content[1].imagePath) {
+              this.form.get("descPath1")?.setValue(data.content[1].imagePath);
+              this.form.get("descPathPosition1")?.setValue(data.content[1].multimediaPosition);
+              this.form.get("descPathType1")?.setValue(data.content[1].multimediaType);
+            }
           };
 
           if(data.content[2]){
             this.form.get("description2")?.setValue(data.content[2].text);
+            if(data.content[2].imagePath) {
+              this.form.get("descPath2")?.setValue(data.content[2].imagePath);
+              this.form.get("descPathPosition2")?.setValue(data.content[2].multimediaPosition);
+              this.form.get("descPathType2")?.setValue(data.content[2].multimediaType);
+            }
           };
 
           if(data.content[3]){
             this.form.get("description3")?.setValue(data.content[3].text);
+            if(data.content[3].imagePath) {
+              this.form.get("descPath3")?.setValue(data.content[3].imagePath);
+              this.form.get("descPathPosition3")?.setValue(data.content[3].multimediaPosition);
+              this.form.get("descPathType3")?.setValue(data.content[3].multimediaType);
+            }
           };
 
           if(data.content[4]){
             this.form.get("description4")?.setValue(data.content[4].text);
+            if(data.content[4].imagePath) {
+              this.form.get("descPath4")?.setValue(data.content[4].imagePath);
+              this.form.get("descPathPosition4")?.setValue(data.content[4].multimediaPosition);
+              this.form.get("descPathType4")?.setValue(data.content[4].multimediaType);
+            }
           };
 
           if(data.content[5]){
             this.form.get("description5")?.setValue(data.content[5].text);
+            if(data.content[5].imagePath) {
+              this.form.get("descPath5")?.setValue(data.content[5].imagePath);
+              this.form.get("descPathPosition5")?.setValue(data.content[5].multimediaPosition);
+              this.form.get("descPathType5")?.setValue(data.content[5].multimediaType);
+            }
           };
 
           if(data.content[6]){
             this.form.get("description6")?.setValue(data.content[6].text);
+            if(data.content[6].imagePath) {
+              this.form.get("descPath6")?.setValue(data.content[6].imagePath);
+              this.form.get("descPathPosition6")?.setValue(data.content[6].multimediaPosition);
+              this.form.get("descPathType6")?.setValue(data.content[6].multimediaType);
+            }
           };
 
           if(data.content[7]){
             this.form.get("description7")?.setValue(data.content[7].text);
+            if(data.content[7].imagePath) {
+              this.form.get("descPath7")?.setValue(data.content[7].imagePath);
+              this.form.get("descPathPosition7")?.setValue(data.content[7].multimediaPosition);
+              this.form.get("descPathType7")?.setValue(data.content[7].multimediaType);
+            }
           };
 
           if(data.content[8]){
             this.form.get("description8")?.setValue(data.content[8].text);
+            if(data.content[8].imagePath) {
+              this.form.get("descPath8")?.setValue(data.content[8].imagePath);
+              this.form.get("descPathPosition8")?.setValue(data.content[8].multimediaPosition);
+              this.form.get("descPathType8")?.setValue(data.content[8].multimediaType);
+            }
           };
 
           if(data.content[9]){
             this.form.get("description9")?.setValue(data.content[9].text);
+            if(data.content[9].imagePath) {
+              this.form.get("descPath9")?.setValue(data.content[9].imagePath);
+              this.form.get("descPathPosition9")?.setValue(data.content[9].multimediaPosition);
+              this.form.get("descPathType9")?.setValue(data.content[9].multimediaType);
+            }
           };
 
+          this.form.get("dateCreated")?.setValue(data.dateCreated);
           this.descriptions = data.content.length - 1;
 
         },
@@ -244,8 +361,6 @@ export class BlogCrearEditarComponent {
     this.formModal.get('file')?.setValue("")
     this.formModal.get('multimedia')?.setValue("")
     this.formModal.get('multimediaPosition')?.setValue("")
-
-    console.log("this.imgsArray", this.imgsArray)
   }
 
   openModal(){
@@ -264,7 +379,8 @@ export class BlogCrearEditarComponent {
     }
   }
 
-  getImage(description: string){
+  getImage(description: string, descPath: string){
+    this.form.get(descPath)?.setValue('');
     const descFiltered = this.imgsArray.filter((t: { descriptionSelect: string; }) => t.descriptionSelect === description);
     return descFiltered[0].multimedia;
   }
@@ -272,7 +388,13 @@ export class BlogCrearEditarComponent {
   dropImg(description: string){
     this.imgsArray = this.imgsArray.filter((t: { descriptionSelect: string; }) => t.descriptionSelect != description);
     this.files = this.files.filter((t: { descriptionSelect: string; }) => t.descriptionSelect != description);
-    this.blogRequest.files = this.files
+    this.blogRequest.files = this.files;
+  }
+
+  dropImgPath(num: string){
+    this.form.get("descPath" + num)?.setValue('');
+    this.form.get("descPathPosition" + num)?.setValue('');
+    this.form.get("descPathType" + num)?.setValue('N');
   }
 
   onSubmit() {
@@ -285,9 +407,10 @@ export class BlogCrearEditarComponent {
 
     content.description = count
     content.text = this.form.controls['description'].value
+    content.descPath = this.form.controls['descPath'].value
     content.file = ""
-    content.multimediaPosition = ""
-    content.multimediaType =  "N"
+    content.multimediaPosition = this.form.controls['descPathPosition'].value
+    content.multimediaType =  this.form.controls['descPathType'].value
 
     if(description.length > 0){
       content.file = description[0].file
@@ -303,9 +426,10 @@ export class BlogCrearEditarComponent {
         count = count + 1
         obj.description = count
         obj.text = desc
+        obj.descPath = this.form.controls['descPath'+i].value;
         obj.file = ""
-        obj.multimediaPosition = ""
-        obj.multimediaType =  "N"
+        obj.multimediaPosition = this.form.controls['descPathPosition'+i].value;
+        obj.multimediaType =  this.form.controls['descPathType'+i].value;
 
         this.imgsArray.map((img:any, index: any) => {
           if(img.descriptionSelect == 'description'+i){
@@ -329,7 +453,19 @@ export class BlogCrearEditarComponent {
     this.fd.append('title', this.form.controls['titulo'].value);
     this.fd.append('views', "0");
     this.fd.append('tag', this.form.controls['tagSelect'].value);
-    this.fd.append('fecha', (new Date()).toString());
+    if(this.id !== null){
+      this.fd.append('dateEdited', (new Date()).toString());
+      this.fd.append('dateCreated', this.form.controls['dateCreated'].value);
+      this.fd.append('state', "E");
+    }else{
+      this.fd.append('dateEdited', (new Date()).toString());
+      this.fd.append('dateCreated', (new Date()).toString());
+      // this.fd.append('dateEdited', (moment(new Date()).add(2, 'd')).toString());
+      // this.fd.append('dateCreated', (moment(new Date()).add(2, 'd')).toString());
+      // this.fd.append('dateEdited', (moment(new Date()).subtract(1, 'd')).toString());
+      // this.fd.append('dateCreated', (moment(new Date()).subtract(1, 'd')).toString());
+      this.fd.append('state', "C");
+    }
 
 
     let countContent = 0;
@@ -338,7 +474,7 @@ export class BlogCrearEditarComponent {
       this.fd.append(`content[${index}][text]`, content.text);
       this.fd.append(`content[${index}][multimediaType]`, content.multimediaType);
       this.fd.append(`content[${index}][multimediaPosition]`, content.multimediaPosition);
-      this.fd.append(`content[${index}][multimediaPath]`, content.multimediaPath);
+      this.fd.append(`content[${index}][descPath]`, content.descPath);
       if(content.file.descriptionSelect){
         this.fd.append(`content[${index}][file]`, `files${countContent}`);
         countContent = countContent + 1
@@ -347,51 +483,104 @@ export class BlogCrearEditarComponent {
       }
     });
 
-    if (this.blogRequest.files) {
-      this.blogRequest.files.sort((a:any, b:any) => {
-        let fa = a.descriptionSelect!.toLowerCase(),
-            fb = b.descriptionSelect!.toLowerCase();
+    if(this.blogRequest.files){
+      if ((this.blogRequest.files).length != 0) {
+        this.blogRequest.files.sort((a:any, b:any) => {
+          let fa = a.descriptionSelect!.toLowerCase(),
+              fb = b.descriptionSelect!.toLowerCase();
 
-        if (fa < fb) {
-            return -1;
+          if (fa < fb) {
+              return -1;
+          }
+          if (fa > fb) {
+              return 1;
+          }
+          return 0;
+        });
+
+        for (let i = 0; i < this.blogRequest.files.length; i++) {
+          this.fd.append(`files${i}`, this.blogRequest.files[i]);
+          if(i+1 == this.blogRequest.files.length){
+            if(this.id !== null){
+              this.blogCrudService.editBlog(this.id, this.fd).subscribe(
+                (data) => {
+                  this.router.navigateByUrl('/dashboard/blogs');
+                  this.toastr.success('Se ha creado satisfactoriamente', `El blog "${data.blog.title}"`);
+                },
+
+                (error) => {
+                  this.router.navigateByUrl('/dashboard/blogs');
+                  this.toastr.error(error, 'Tenemos un problema');
+                }
+              );
+            }else{
+              this.blogCrudService.saveBlog(this.fd).subscribe(
+                (data) => {
+                  this.router.navigateByUrl('/dashboard/blogs');
+                  this.toastr.success('Se ha creado satisfactoriamente', `El blog "${data.blog.title}"`);
+                },
+
+                (error) => {
+                  this.router.navigateByUrl('/dashboard/blogs');
+                  this.toastr.error(error, 'Tenemos un problema');
+                }
+              );
+            }
+          }
         }
-        if (fa > fb) {
-            return 1;
-        }
-        return 0;
-      });
+      }else{
+        if(this.id !== null){
+          this.blogCrudService.editBlog(this.id, this.fd).subscribe(
+            (data) => {
+              this.router.navigateByUrl('/dashboard/blogs');
+              this.toastr.success(data.message, `El blog "${data.blog.title}"`);
+            },
 
-      for (let i = 0; i < this.blogRequest.files.length; i++) {
-        this.fd.append(`files${i}`, this.blogRequest.files[i]);
-        if(i+1 == this.blogRequest.files.length){
-          console.log("this.fd", this.fd);
-          // this.blogCrudService.saveBlog(this.fd).subscribe(
-          //   (data) => {
-          //     this.router.navigateByUrl('/dashboard/blogs');
-          //     this.toastr.success('Se a creado satisfactoriamente', `El blog "${data.blog.title}"`);
-          //   },
+            (error) => {
+              this.router.navigateByUrl('/dashboard/blogs');
+              this.toastr.error(error.error, 'Error');
+            }
+          );
+        }else{
+          this.blogCrudService.saveBlog(this.fd).subscribe(
+            (data) => {
+              this.router.navigateByUrl('/dashboard/blogs');
+              this.toastr.success(data.message, `El blog "${data.blog.title}"`);
+            },
 
-          //   (error) => {
-          //     this.router.navigateByUrl('/dashboard/blogs');
-          //     this.toastr.error(error, 'Tenemos un problema');
-          //   }
-          // );
+            (error) => {
+              this.router.navigateByUrl('/dashboard/blogs');
+              this.toastr.error(error.error, 'Error');
+            }
+          );
         }
       }
     }else{
-      console.log("this.fd", this.fd);
-      // this.blogCrudService.saveBlog(this.fd).subscribe(
-      //   (data) => {
-      //     this.router.navigateByUrl('/dashboard/blogs');
-      //     this.toastr.success(data.message, `El blog "${data.blog.title}"`);
-      //   },
+      if(this.id !== null){
+        this.blogCrudService.editBlog(this.id, this.fd).subscribe(
+          (data) => {
+            this.router.navigateByUrl('/dashboard/blogs');
+            this.toastr.success(data.message, `El blog "${data.blog.title}"`);
+          },
 
-      //   (error) => {
-      //     console.log("error", error)
-      //     this.router.navigateByUrl('/dashboard/blogs');
-      //     this.toastr.error(error.error, 'Error');
-      //   }
-      // );
+          (error) => {
+            this.router.navigateByUrl('/dashboard/blogs');
+            this.toastr.error(error.error, 'Error');
+          }
+        );
+      }else{
+        this.blogCrudService.saveBlog(this.fd).subscribe(
+          (data) => {
+            this.router.navigateByUrl('/dashboard/blogs');
+            this.toastr.success(data.message, `El blog "${data.blog.title}"`);
+          },
+
+          (error) => {
+            this.router.navigateByUrl('/dashboard/blogs');
+            this.toastr.error(error.error, 'Error');
+          }
+        );
+      }
     }
 
   }

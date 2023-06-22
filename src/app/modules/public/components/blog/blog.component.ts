@@ -15,8 +15,16 @@ export class BlogComponent {
   tags:any;
   urlServer = environment.server;
 
+  registers:number = 0;
+  maxPerPage:number = 10;
+  sort:string = "fecha";
+  pagination!:number;
+  page:number = 1;
+
+  dataExists:boolean = false;
+
   constructor(
-    private _blogService: BlogService,
+    private blogService: BlogService,
     private generalService: GeneralService,
     public router: Router
     ){ }
@@ -29,6 +37,7 @@ export class BlogComponent {
   getTags(){
     this.generalService.getTags().subscribe(
       (data) => {
+        console.log("tag", data)
         this.tags = data
         this.getBlogs();
       },
@@ -40,24 +49,33 @@ export class BlogComponent {
   }
 
   getBlogs() {
-    this._blogService.getBlogs().subscribe(
+    this.blogService.getBlogs(this.maxPerPage, this.page, this.sort).subscribe(
       (data) => {
-        let newData = data
-        newData.map((item:any, index: any) => {
-          item.fechaFormat = moment(new Date(item.fecha)).format('YYYY-MM-DD hh:mm A');
+        this.pagination = data.pagination;
+        this.registers = data.registers;
 
-          const tag = this.tags.filter((t: { _id: string; }) => t._id == item.tag);
+        if(data.data.length == 0){
+          this.dataExists = false;
+          this.blogs = data.data;
+        }
+        else{
+          console.log("data", data)
+          let newData = data.data
+          newData.map((item:any, index: any) => {
+            item.fechaFormat = moment(new Date(item.dateCreated)).format('YYYY-MM-DD hh:mm A');
 
-          if (tag.length > 0) {
-            item.tag = {color: tag[0].color, description: tag[0].description, title: tag[0].title}
-          };
+            const tag = this.tags.filter((t: { _id: string; }) => t._id == item.tag);
 
-          if(newData.length == index+1){
-            this.blogs = newData
-            console.log("this.blogs", this.blogs)
-          };
+            if (tag.length > 0) {
+              item.tag = {color: tag[0].color, description: tag[0].description, title: tag[0].title}
+            };
 
-        });
+            if(newData.length == index+1){
+              this.blogs = newData;
+            };
+
+          });
+        }
       },
       (error) => {
         console.log(error);
@@ -65,8 +83,21 @@ export class BlogComponent {
     );
   }
 
+  pageChange(newPag: number){
+    this.page = newPag;
+    this.getBlogs();
+  }
+
   redirect(ruta: any){
     this.router.navigate([`/blog-post/${ruta}`]);
+  }
+
+  changeTag(){
+
+  }
+
+  changeSort(){
+
   }
 
 }

@@ -7,10 +7,12 @@
     </div>
   </div>
 
+  <app-pagination [pagination]="pagination" (pageChange)="pageChange($event)"></app-pagination>
+
   <div class="table-responsive">
-    <table class="table table-striped table-sm">
+    <table class="table table-sm">
       <thead>
-        <tr>
+        <tr class="col-head">
           <th scope="col">Usuario</th>
           <th scope="col">Correo</th>
           <th scope="col">Nombre</th>
@@ -19,9 +21,10 @@
           <th scope="col">Crear</th>
           <th scope="col">Editar</th>
           <th scope="col">Eliminar</th>
+          <th scope="col">Acciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="dataExists">
         <tr *ngFor="let user of users">
           <td>{{user.codigo}}</td>
           <td>{{user.email}}</td>
@@ -47,8 +50,18 @@
             <span *ngIf="user.eliminar">Si</span>
             <span *ngIf="!user.eliminar">No</span>
           </td>
+          <td class="d-flex justify-content-center">
+            <a [routerLink]="['/dashboard/editar-user', user._id]">
+              <i class="bi bi-pencil-square"></i>
+            </a> <div style="margin-left: 1rem">
+            </div>
+            <a (click)="deleteData(user._id)">
+              <i class="bi bi-trash-fill"></i>
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>
+    <p class="d-flex justify-content-center" *ngIf="!dataExists">No existen registros actualmente</p>
   </div>
 </div>

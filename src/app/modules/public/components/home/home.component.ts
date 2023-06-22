@@ -20,7 +20,7 @@ export class HomeComponent {
   urlServer = environment.server;
 
   constructor(
-    private _blogService: BlogService,
+    private blogService: BlogService,
     private toastr: ToastrService,
     private generalService: GeneralService,
     private servicesService: ServicesService,
@@ -52,7 +52,7 @@ export class HomeComponent {
   }
 
   getLastBlogs() {
-    this._blogService.getLastBlogs(1).subscribe(
+    this.blogService.getLastBlogs(1).subscribe(
       (data) => {
         this.lastBlog = data[0];
         this.lastBlog.fechaFormat = moment(new Date(this.lastBlog.fecha)).format('YYYY-MM-DD hh:mm A');
@@ -64,7 +64,7 @@ export class HomeComponent {
   };
 
   getPopularBlogs() {
-    this._blogService.getPopularBlogs(2).subscribe(
+    this.blogService.getPopularBlogs(2).subscribe(
       (data) => {
         let newData = data;
         newData.map((item:any, index: any) => {
@@ -78,7 +78,6 @@ export class HomeComponent {
 
           if(newData.length == index+1){
             this.popularBlogs = newData;
-            console.log("this.popularBlogs", this.popularBlogs)
           };
 
         });

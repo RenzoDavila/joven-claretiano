@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/modules/public/services/user/user.service';
 import { UserCrudService } from '../../../services/user-crud/user-crud.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-usuario-crear-editar',
@@ -15,7 +16,7 @@ export class UsuarioCrearEditarComponent {
   form: FormGroup;
   eye: boolean = false;
   disabledOnSubmit: boolean = false;
-  readOnlyFlags:any = {} ;
+  readOnlyFlags:any = {};
 
   constructor(
     private fb: FormBuilder,
@@ -23,6 +24,7 @@ export class UsuarioCrearEditarComponent {
     private userService: UserService,
     private userCrudService: UserCrudService,
     private router: Router,
+    private toastr: ToastrService,
     ){
     this.form = this.fb.group({
       codigo: [''],
@@ -45,36 +47,50 @@ export class UsuarioCrearEditarComponent {
 
   onSubmit() {
     this.disabledOnSubmit = true;
-
-    this.userCrudService.saveUser(this.form.value).subscribe(
-      (data) => {
-        this.router.navigateByUrl('/dashboard/users');
-      },
-
-      (error) => {
-        console.log("error", error)
-        this.router.navigateByUrl('/dashboard/users');
-      }
-    );
-
+    if (this.id !== null) {
+      this.userCrudService.editUser(this.id, this.form.value).subscribe(
+        (data) => {
+          console.log("creado", data.body);
+          this.toastr.success(`Usuario: "${data.body.codigo}"`, data.message);
+          this.router.navigateByUrl('/dashboard/users');
+        },
+        (error) => {
+          this.toastr.error(error, 'Tenemos un problema');
+          this.router.navigateByUrl('/dashboard/users');
+        }
+      );
+    }
+    else{
+      this.userCrudService.saveUser(this.form.value).subscribe(
+        (data) => {
+          console.log("creado", data);
+          this.toastr.success(`Usuario: "${data.body.codigo}"`, data.message);
+          this.router.navigateByUrl('/dashboard/users');
+        },
+        (error) => {
+          this.toastr.error(error, 'Tenemos un problema');
+          this.router.navigateByUrl('/dashboard/users');
+        }
+      );
+    }
   }
 
   esEditar() {
     if (this.id !== null) {
       this.userService.getUser(this.id).subscribe(
         (data) => {
-          console.log("data", data)
+          console.log("es editar", data)
           this.form.setValue({
-            codigo: '',
-            nombres: '',
-            apellidos: '',
-            email: '',
-            estado: '',
-            pass: '',
-            ver: '',
-            crear: '',
-            editar: '',
-            eliminar: '',
+            codigo: data.codigo,
+            nombres: data.nombres,
+            apellidos: data.apellidos,
+            email: data.email,
+            estado: data.estado,
+            pass: data.password,
+            ver: data.ver,
+            crear: data.crear,
+            editar: data.editar,
+            eliminar: data.eliminar,
           });
         },
         (error) => {
