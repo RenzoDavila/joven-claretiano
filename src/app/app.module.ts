@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PrivateModule } from './modules/private/private.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent]
 })
