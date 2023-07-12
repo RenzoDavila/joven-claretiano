@@ -1,16 +1,18 @@
 <div class="text-center">
   <main class="form-signin">
-    <form>
+    <form [formGroup]="form">
       <img class="mb-4" src="assets/icono.png" alt="" width="72" height="72">
       <h1 class="h3 mb-3 fw-normal">Bienvenido al sistema de administración</h1>
 
       <div class="form-floating">
-        <input type="text" class="form-control" id="user" placeholder="Usuario">
-        <label for="floatingInput">Usuario</label>
+        <input formControlName="userLogin" type="text" class="form-control" id="userLogin" placeholder="Usuario" [ngClass]="{'required' : (form.get('userLogin')?.hasError('required') && form.get('userLogin')?.touched)}">
+        <label style="color: rgba(255, 0, 0, 0.54);" for="floatingInput" *ngIf="form.get('userLogin')?.hasError('required') && form.get('userLogin')?.touched">Usuario es <strong>obligatorio</strong></label>
+        <label for="floatingInput" *ngIf="!(form.get('userLogin')?.hasError('required') && form.get('userLogin')?.touched)">Usuario</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="pass" placeholder="Contraseña">
-        <label for="floatingPassword">Contraseña</label>
+        <input formControlName="passLogin" type="passLoginword" class="form-control" id="passLogin" placeholder="Contraseña" [ngClass]="{'required' : (form.get('passLogin')?.hasError('required') && form.get('passLogin')?.touched)}">
+        <label style="color: rgba(255, 0, 0, 0.54);" for="floatingPassword" *ngIf="form.get('passLogin')?.hasError('required') && form.get('passLogin')?.touched">Contraseña es <strong>obligatoria</strong></label>
+        <label for="floatingPassword" *ngIf="!(form.get('passLogin')?.hasError('required') && form.get('passLogin')?.touched)">Contraseña</label>
       </div>
 
       <button class="w-100 btn btn-lg btn-outline-primary" type="submit" (click)="login()">Ingresar</button>

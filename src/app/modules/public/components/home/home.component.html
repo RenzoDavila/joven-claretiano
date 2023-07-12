@@ -5,7 +5,7 @@
       <h1 class="display-3 fst-italic">{{lastBlog.title}}</h1>
       <strong class="d-inline-block mb-2 text-muted">{{lastBlog.fechaFormat}}</strong>
       <p class="lead my-3 content-last">{{lastBlog.content[0].text}}</p>
-      <p class="lead mb-0"><a href="/blog-post/{{lastBlog._id}}" class="text-white fw-bold">... ver más</a></p>
+      <p class="lead mb-0"><a (click)="redirect(lastBlog._id)" class="text-white fw-bold">... ver más</a></p>
     </div>
     <div class="col-2 d-none d-lg-block icon-area">
       <div class="icon-area-align">
@@ -41,8 +41,8 @@
 
   <div class="row mb-2 py-2">
     <h2 class="blog-post-title py-4 display-6">Publicaciones populares</h2>
-    <div class="d-md-flex flex-md-equal w-100" style="cursor: pointer;" (click)="redirect(lastBlog._id)">
-      <div *ngFor="let popular of popularBlogs" style="width: 100%; margin-right: 30px; margin-left: 30px;">
+    <div class="d-md-flex flex-md-equal w-100" style="cursor: pointer;">
+      <div *ngFor="let popular of popularBlogs" style="width: 100%; margin-right: 30px; margin-left: 30px;" (click)="redirect(popular._id)">
         <div class="text-center overflow-hidden border rounded shadow-sm w-100 w-sm-50 mx-2">
           <div class="my-3 p-3 text-content-popular">
             <h2 class="display-10">{{popular.title}}</h2>

@@ -10,34 +10,36 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active' : router.url === ''}" aria-current="page" [routerLink]="['']">Home</a>
+            <a class="nav-link" [ngClass]="{'active' : router.url === '/'}" aria-current="page" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active' : router.url === '/blog'}" [routerLink]="['/blog']">Blogs</a>
+            <a class="nav-link" [ngClass]="{'active' : router.url.includes('/blog') && !router.url.includes('/dashboard')}" [routerLink]="['/blog']">Blogs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active' : router.url === '/about'}" [routerLink]="['/about']">Nosotros</a>
+            <a class="nav-link" [ngClass]="{'active' : router.url.includes('/about') && !router.url.includes('/dashboard')}" [routerLink]="['/about']">Nosotros</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active' : router.url === '/contact'}" [routerLink]="['/contact']">Contáctame</a>
+            <a class="nav-link" [ngClass]="{'active' : router.url.includes('/contact') && !router.url.includes('/dashboard')}" [routerLink]="['/contact']">Contáctame</a>
           </li>
           <li class="nav-item" *ngIf="this.userData.codigo != ''">
-            <a class="nav-link" [ngClass]="{'active' : router.url === '/dashboard'}" [routerLink]="['/dashboard']">Dashboard</a>
+            <a class="nav-link" [ngClass]="{'active' : router.url.includes('/dashboard')}" [routerLink]="['/dashboard']">Dashboard</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" [ngClass]="{'active' : router.url === '/disabled', 'disabled' : router.url != '/disabled'}">Disabled</a>
-          </li>
+          </li> -->
         </ul>
         <div>
           <button *ngIf="this.userData.codigo == ''" type="button" class="btn btn-warning" (click)="openSesion()">Iniciar sesión</button>
           <div  *ngIf="this.userData.codigo != ''" class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="assets/private/imgs/usuario.png" alt="" class="rounded-circle me-2" width="32" height="32">
+              <!-- <img src="assets/private/imgs/usuario.png" alt="" class="rounded-circle me-2" width="32" height="32"> -->
               <strong>{{this.userData.codigo | titlecase}}</strong>
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser">
-              <li><a class="dropdown-item" style="pointer-events: none !important; ">{{this.userData.estado | titlecase}}</a></li>
-              <li><a class="dropdown-item" href="#">Configuración</a></li>
+              <li><a class="dropdown-item" style="pointer-events: none !important;" *ngIf="this.userData.estado == 'SA'">Super Admin</a></li>
+              <li><a class="dropdown-item" style="pointer-events: none !important;" *ngIf="this.userData.estado == 'A'">Admin</a></li>
+              <li><a class="dropdown-item" style="pointer-events: none !important;" *ngIf="this.userData.estado == 'N'">Normal</a></li>
+              <!-- <li><a class="dropdown-item" href="#">Configuración</a></li> -->
               <li><hr class="dropdown-divider"></li>
               <li (click)="closeSesion()"><a class="dropdown-item pointer">Cerrar sesión</a></li>
             </ul>

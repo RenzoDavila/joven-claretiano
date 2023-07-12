@@ -41,19 +41,19 @@ export class HeaderComponent {
   }
 
   openSesion(){
-    const user: User = {
-      // codigo: "",
-      codigo: "admin",
-      nombre: "nombre admin",
-      password: "123",
-      estado: "super admin",
-      ver: true,
-      crear: true,
-      editar: true,
-      eliminar: true
-    }
-    this.observableUserServices.setUser(user)
-    this.router.navigate(['/']);
+    // const user: User = {
+    //   // codigo: "",
+    //   codigo: "admin",
+    //   nombre: "nombre admin",
+    //   password: "123",
+    //   estado: "super admin",
+    //   ver: true,
+    //   crear: true,
+    //   editar: true,
+    //   eliminar: true
+    // }
+    // this.observableUserServices.setUser(user)
+    this.router.navigate(['/login']);
   }
 
 }

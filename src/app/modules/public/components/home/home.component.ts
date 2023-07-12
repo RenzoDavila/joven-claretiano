@@ -54,8 +54,9 @@ export class HomeComponent {
   getLastBlogs() {
     this.blogService.getLastBlogs(1).subscribe(
       (data) => {
+        console.log("data",data)
         this.lastBlog = data[0];
-        this.lastBlog.fechaFormat = moment(new Date(this.lastBlog.fecha)).format('YYYY-MM-DD hh:mm A');
+        this.lastBlog.fechaFormat = moment(new Date(this.lastBlog.dateCreated)).format('YYYY-MM-DD hh:mm A');
       },
       (error) => {
         console.log(error);
