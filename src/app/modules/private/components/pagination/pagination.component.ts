@@ -29,8 +29,8 @@ export class PaginationComponent {
     this.pageChange.emit(newPag);
   }
 
-  changePageSelect(){
-    let newPag:number = parseInt((<HTMLInputElement>document.getElementById("pagSelect")).value);
+  changePageSelect(changePage: any){
+    let newPag:number = parseInt(changePage.value);
     this.page = newPag;
     this.pageChange.emit(newPag);
 

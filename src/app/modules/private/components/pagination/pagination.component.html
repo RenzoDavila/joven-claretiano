@@ -54,7 +54,7 @@
     </ul>
   </nav>
 
-  <select class="form-select" id="pagSelect" [value]="page" (change)="changePageSelect()">
+  <select class="form-select" id="pagSelect" [value]="page" (change)="changePageSelect($event.target)">
     <option *ngFor="let dummy of ' '.repeat(newPagination).split(''), let i = index" [value]="i+1">Pag. {{i+1}}</option>
   </select>
 
