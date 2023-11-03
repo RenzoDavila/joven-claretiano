@@ -467,6 +467,7 @@ export class BlogCrearEditarComponent {
       this.fd.append('state', "C");
     }
 
+    //cambio
 
     let countContent = 0;
     arrayContent.map((content:any, index: any) => {
